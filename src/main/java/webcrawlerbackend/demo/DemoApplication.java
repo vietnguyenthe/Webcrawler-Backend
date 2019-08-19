@@ -17,6 +17,7 @@ public class DemoApplication {
            start(14,15,0,"53804");
         } catch (ParseException e) {
             e.printStackTrace();
+            System.out.println("Fehler! Crawler nicht erfolgreich");
         }
     }
 
