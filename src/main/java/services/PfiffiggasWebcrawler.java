@@ -7,12 +7,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Service;
+
+import javax.swing.*;
 import java.text.ParseException;
 import java.util.*;
+import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class PfiffiggasWebcrawler {
+
+    public static List<String> preise = new ArrayList<>();
 
     public static void start(int std, int min, int sek, String plz) throws ParseException {
         Calendar today = Calendar.getInstance();
@@ -20,21 +25,20 @@ public class PfiffiggasWebcrawler {
         today.set(Calendar.MINUTE, min);
         today.set(Calendar.SECOND, sek);
         Timer timer = new Timer();
-        List<String> preise = new ArrayList<>();
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Felix Weyer\\Desktop\\webCrawler\\chromedriver.exe");
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                tankcrawlen(plz);
+                tankcrawlen(plz,driver,chromeOptions);
             }
         };
         timer.scheduleAtFixedRate(timerTask, today.getTime(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
     }
 
-    public static void tankcrawlen(String plz) {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Felix Weyer\\Desktop\\webCrawler\\chromedriver.exe");
-        ChromeOptions chromeOptions = new ChromeOptions();
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        chromeOptions.addArguments("--headless");// --headless   --startup-maximized
+    public static void tankcrawlen(String plz,WebDriver driver, ChromeOptions chromeOptions) {
         driver.get("https://pfiffiggas.de/#!/mein-preis");
         Select element = new Select(driver.findElement(By.tagName("Select")));
         element.selectByVisibleText("1.2t (2700 Liter)");
@@ -43,17 +47,21 @@ public class PfiffiggasWebcrawler {
         waitForAction(3.0);
         text = driver.findElement(By.xpath("/html/body/div[4]/div/div[1]/div/div[2]/div/div/div[2]/div/div[1]/div/div[1]/span"));
         System.out.println(text.getText());
+        preise.add(text.getText());
         waitForAction(2.0);
         element.selectByVisibleText("2.1t (4850 Liter)");
         waitForAction(3.0);
         text = driver.findElement(By.xpath("/html/body/div[4]/div/div[1]/div/div[2]/div/div/div[2]/div/div[1]/div/div[1]/span"));
         System.out.println(text.getText());
+        preise.add(text.getText());
         waitForAction(2.0);
         element.selectByVisibleText("2.9t (6400 Liter)");
         waitForAction(3.0);
         text = driver.findElement(By.xpath("/html/body/div[4]/div/div[1]/div/div[2]/div/div/div[2]/div/div[1]/div/div[1]/span"));
         System.out.println(text.getText());
+        preise.add(text.getText());
         waitForAction(2.0);
+        driver.close();
    }
 
     public static void waitForAction(final double time) {
