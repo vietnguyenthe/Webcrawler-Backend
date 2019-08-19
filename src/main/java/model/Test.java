@@ -1,4 +1,4 @@
-package Webcrawler;
+package model;
 
 public class Test {
 }
