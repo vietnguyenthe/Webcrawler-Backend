@@ -1,4 +1,4 @@
-package Entity;
+package controller;
 
 public class Test {
 }
