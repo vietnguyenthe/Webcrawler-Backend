@@ -6,12 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Service;
+import org.openqa.selenium.NoSuchElementException;
+
 
 @Service
 public class Fluessiggas123 extends Crawler {
 
     @Override
-    public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) {
+    public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
 
         driver.get("https://www.123-fluessiggas.de/");
         // JavascriptExector hilft beim Runterscrollen der Seite, weil ansonsten Silenium die unteren Elemente nicht anklicken kann

@@ -3,13 +3,14 @@ package services;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
-public abstract class Crawler {
+public abstract class Crawler{
 
     List<String>preise = new ArrayList<>();
 
@@ -25,7 +26,7 @@ public abstract class Crawler {
         WebDriver driver = new ChromeDriver(chromeOptions);
         TimerTask timerTask = new TimerTask() {
             @Override
-            public void run() {
+            public void run() throws NoSuchElementException {
                 tankcrawlen(plz, driver, chromeOptions);
             }
         };
@@ -33,17 +34,17 @@ public abstract class Crawler {
     }
 
 
-    public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions);
+    public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException;
 
-    public void allePLZCrawlen() throws ParseException {
-        start(15, 30, 0, "51570");
-        start(15, 31, 0, "52152");
-        start(15, 32, 0, "53804");
-        start(15, 33, 0, "54290");
-        start(15, 34, 0, "55543");
-        start(15, 35, 0, "56072");
-        start(15, 36, 0, "57539");
-        start(15, 37, 0, "58119");
+    public void allePLZCrawlen() throws ParseException,NoSuchElementException {
+        start(16, 07, 0, "51570");
+        start(16, 8, 0, "52152");
+        start(16, 9, 0, "53804");
+        start(16, 10, 0, "54290");
+        start(16, 11, 0, "55543");
+        start(16, 12, 0, "56072");
+        start(16, 13, 0, "57539");
+        start(16, 14, 0, "58119");
 
     }
 

@@ -3,6 +3,7 @@ package services;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,7 +14,7 @@ public class MeinFluessiggasWebcrawler extends Crawler{
 
 
     @Override
-    public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) {
+    public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
         driver.get("https://www.meinfluessiggas.de/");
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,300)");
