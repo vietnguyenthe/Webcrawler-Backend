@@ -7,6 +7,7 @@ import services.MeinFluessiggasWebcrawler;
 import services.PfiffiggasWebcrawler;
 
 import java.text.ParseException;
+import org.openqa.selenium.NoSuchElementException;
 
 
 @SpringBootApplication
@@ -24,9 +25,11 @@ public class DemoApplication {
             pfiffiggasWebcrawler.allePLZCrawlen();
             meinFluessiggasWebcrawler.allePLZCrawlen();
             fluessiggas123.allePLZCrawlen();
-        } catch (ParseException e) {
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
             System.out.println("Fehler! Crawler nicht erfolgreich");
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

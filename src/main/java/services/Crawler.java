@@ -13,7 +13,7 @@ public abstract class Crawler {
 
     List<String>preise = new ArrayList<>();
 
-    public void start(int std, int min, int sek, String plz) throws ParseException {
+    public void start(int std, int min, int sek, String plz) throws ParseException, NoSuchElementException {
         Calendar today = Calendar.getInstance();
         today.set(Calendar.HOUR_OF_DAY, std);
         today.set(Calendar.MINUTE, min);
@@ -36,14 +36,14 @@ public abstract class Crawler {
     public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions);
 
     public void allePLZCrawlen() throws ParseException {
-        start(14, 50, 0, "51570");
-   /*     start(14, 51, 0, "52152");
-        start(14, 52, 0, "53804");
-        start(14, 53, 0, "54290");
-        start(14, 54, 0, "55543");
-        start(14, 55, 0, "56072");
-        start(14, 56, 0, "57539");
-        start(14, 57, 0, "58119");*/
+        start(15, 30, 0, "51570");
+        start(15, 31, 0, "52152");
+        start(15, 32, 0, "53804");
+        start(15, 33, 0, "54290");
+        start(15, 34, 0, "55543");
+        start(15, 35, 0, "56072");
+        start(15, 36, 0, "57539");
+        start(15, 37, 0, "58119");
 
     }
 
@@ -52,6 +52,7 @@ public abstract class Crawler {
             Thread.sleep((int) (time * 1000));
         } catch (final InterruptedException e) {
             e.printStackTrace();
+
         }
     }
 }
