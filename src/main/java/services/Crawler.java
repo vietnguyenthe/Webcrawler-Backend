@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public abstract class Crawler {
+
     List<String>preise = new ArrayList<>();
 
     public void start(int std, int min, int sek, String plz) throws ParseException {
