@@ -39,7 +39,17 @@ public abstract class Crawler{
         public static void tankcrawlen (String plz, WebDriver driver, ChromeOptions chromeOptions){}
 
 
-        public static void allePLZCrawlen () throws ParseException{}
+        public static void allePLZCrawlen () throws ParseException{
+            start(11,34,0, "51570");
+            start(11,35,0, "52152");
+            start(11,36,0, "53804");
+            start(11,37,0, "54290");
+            start(11,38,0, "55543");
+            start(11,39,0, "56072");
+            start(11,40,0, "57539");
+            start(11,41,0, "58119");
+            System.out.println("Crawler beendet");
+        }
 
 
         public static void plzGenerieren (){}

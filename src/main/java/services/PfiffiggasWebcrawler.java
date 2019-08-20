@@ -15,7 +15,7 @@ import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class PfiffiggasWebcrawler {
+public class PfiffiggasWebcrawler extends Crawler {
 
 
 
@@ -72,20 +72,19 @@ public class PfiffiggasWebcrawler {
 
 
    public static void allePLZCrawlen() throws ParseException {
-        start(11,00,0, "53804");
-        start(11,01,0, "51740");
-        start(11,02,0, "52152");
-        start(11,03,0, "53819");
-        start(11,04,0, "57539");
-       System.out.println("Crawler beendet");
+        start(11,34,0, "51570");
+        start(11,35,0, "52152");
+        start(11,36,0, "53804");
+        start(11,37,0, "54290");
+        start(11,38,0, "55543");
+        start(11,39,0, "56072");
+        start(11,40,0, "57539");
+        start(11,41,0, "58119");
+        System.out.println("Crawler beendet");
 
    }
 
     public static void plzGenerieren(){
-
-
-
-
 
     }
 
