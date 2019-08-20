@@ -17,7 +17,11 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class PfiffiggasWebcrawler {
 
+
+
     public static List<String> preise = new ArrayList<>();
+    public static List<String>plz = new ArrayList<>();
+
 
     public static void start(int std, int min, int sek, String plz) throws ParseException {
         Calendar today = Calendar.getInstance();
@@ -63,6 +67,25 @@ public class PfiffiggasWebcrawler {
         waitForAction(2.0);
         driver.close();
    }
+
+
+
+
+   public static void allePLZCrawlen() throws ParseException {
+
+       start(9,37,20,"53819");
+
+   }
+
+
+    public static void plzGenerieren(){
+
+
+
+
+
+    }
+
 
     public static void waitForAction(final double time) {
         try {
