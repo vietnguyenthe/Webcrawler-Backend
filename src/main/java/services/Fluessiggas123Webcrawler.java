@@ -123,8 +123,16 @@ public class Fluessiggas123Webcrawler {
         System.out.println(preisProLiterNetto);
     }
 
+    public static void waitForAction(final double time) {
+        try {
+            Thread.sleep((int) (time * 1000));
+        } catch (final InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-/*
+
+    /*
     public static void run (){
         // Voraussetzungen setzen
         String url = "https://www.123-fluessiggas.de/";
@@ -180,14 +188,6 @@ public class Fluessiggas123Webcrawler {
         System.out.println(preisProLiterNetto);
     }
 */
-
-    public static void waitForAction(final double time) {
-        try {
-            Thread.sleep((int) (time * 1000));
-        } catch (final InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 
