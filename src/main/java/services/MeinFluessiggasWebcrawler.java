@@ -52,6 +52,7 @@ public class MeinFluessiggasWebcrawler extends Crawler{
         waitForAction(2.0);
         driver.findElement(By.id("options_2_text")).sendKeys("0");
         System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
+        driver.close();
 
     }
 
