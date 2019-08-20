@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public abstract class Crawler {
+    List<String>preise = new ArrayList<>();
 
     public void start(int std, int min, int sek, String plz) throws ParseException {
         Calendar today = Calendar.getInstance();
@@ -31,7 +32,7 @@ public abstract class Crawler {
     }
 
 
-    public  void allePLZCrawlen() throws ParseException {
+    public void allePLZCrawlen() throws ParseException {
         start(13, 37, 0, "51570");
         //start(12, 02, 0, "52152");
         //start(12, 03, 0, "53804");
