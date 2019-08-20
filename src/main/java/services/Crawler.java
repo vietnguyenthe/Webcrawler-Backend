@@ -33,20 +33,19 @@ public abstract class Crawler {
     }
 
 
-    public void allePLZCrawlen() throws ParseException {
-        start(13, 37, 0, "51570");
-        //start(12, 02, 0, "52152");
-        //start(12, 03, 0, "53804");
-        //start(12, 04, 0, "54290");
-        //start(12, 05, 0, "55543");
-        //start(12, 06, 0, "56072");
-        //start(12, 07, 0, "57539");
-        //start(12, 8, 0, "58119");
-        //System.out.println("Crawler beendet");
-    }
-
-
     public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions);
+
+    public void allePLZCrawlen() throws ParseException {
+        start(14, 50, 0, "51570");
+        start(14, 51, 0, "52152");
+        start(14, 52, 0, "53804");
+        start(14, 53, 0, "54290");
+        start(14, 54, 0, "55543");
+        start(14, 55, 0, "56072");
+        start(14, 56, 0, "57539");
+        start(14, 57, 0, "58119");
+
+    }
 
     public static void waitForAction(final double time) {
         try {
