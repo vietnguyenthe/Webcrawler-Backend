@@ -29,7 +29,7 @@ public class PfiffiggasWebcrawler {
         today.set(Calendar.MINUTE, min);
         today.set(Calendar.SECOND, sek);
         Timer timer = new Timer();
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Felix Weyer\\Desktop\\webCrawler\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\src\\main\\resources\\chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
         WebDriver driver = new ChromeDriver(chromeOptions);
@@ -72,11 +72,14 @@ public class PfiffiggasWebcrawler {
 
 
    public static void allePLZCrawlen() throws ParseException {
-
-       start(9,37,20,"53819");
+        start(11,00,0, "53804");
+        start(11,01,0, "51740");
+        start(11,02,0, "52152");
+        start(11,03,0, "53819");
+        start(11,04,0, "57539");
+       System.out.println("Crawler beendet");
 
    }
-
 
     public static void plzGenerieren(){
 
