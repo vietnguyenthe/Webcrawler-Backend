@@ -32,7 +32,7 @@ public class MeinFluessiggasWebcrawler {
                 driver.get("https://www.meinfluessiggas.de/");
                 JavascriptExecutor jse = (JavascriptExecutor) driver;
 
-                ////*[@id="product-options-wrapper"]/div[5]/div[1]/div[1]
+                //0,8-Tonnen-Container
                 WebElement element = driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[1]"));
                 element.click();
                 jse.executeScript("window.scrollBy(0,200)");
@@ -42,10 +42,34 @@ public class MeinFluessiggasWebcrawler {
                 jse.executeScript("window.scrollBy(0,200)");
                 waitForAction(1.0);
                 driver.findElement(By.id("options_2_text")).sendKeys("0");
-                System.out.println(driver.findElement(By.id("priceNetto")).getText());
+                System.out.println("0,8t: "+driver.findElement(By.id("priceNetto")).getText());
 
+                //1,2-Tonnen-Container
+                waitForAction(2.0);
+                driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[2]")).click();
+                waitForAction(2.0);
+                driver.findElement(By.xpath("//*[@id=\"select_6678_chosen\"]/div/div/input")).sendKeys("50321");
+                waitForAction(1.0);
+                driver.findElement(By.id("options_2_text")).sendKeys("0");
+                System.out.println("1,2t: "+driver.findElement(By.id("priceNetto")).getText());
 
+                //2,1-Tonnen-Container
+                waitForAction(2.0);
+                driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[3]")).click();
+                waitForAction(2.0);
+                driver.findElement(By.xpath("//*[@id=\"select_6679_chosen\"]/div/div/input")).sendKeys("50321");
+                waitForAction(1.0);
+                driver.findElement(By.id("options_2_text")).sendKeys("0");
+                System.out.println("2,1t: "+driver.findElement(By.id("priceNetto")).getText());
 
+                //2,9-Tonnen-Container
+                waitForAction(2.0);
+                driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[4]")).click();
+                waitForAction(2.0);
+                driver.findElement(By.xpath("//*[@id=\"select_6680_chosen\"]/div/div/input")).sendKeys("50321");
+                waitForAction(1.0);
+                driver.findElement(By.id("options_2_text")).sendKeys("0");
+                System.out.println("2,9t: "+driver.findElement(By.id("priceNetto")).getText());
             }
         };
         timer.scheduleAtFixedRate(timerTask, today.getTime(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
