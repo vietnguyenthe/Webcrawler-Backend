@@ -39,7 +39,7 @@ public class Fluessiggas123 extends Crawler {
         // 1. Bestellmenge
         WebElement ausgabeBestellmenge = driver.findElement(By.id("order_quantity"));
         preise.add(ausgabeBestellmenge.getText());
-        System.out.println("Flüssiggas123 Bestellmenge: " + ausgabeBestellmenge.getText());
+        //System.out.println("Flüssiggas123 Bestellmenge: " + ausgabeBestellmenge.getText());
 
         // 2. Preis pro Liter in netto
         WebElement ausgabePreisProLiter = driver.findElement(By.id("price_liter_net"));
@@ -59,7 +59,7 @@ public class Fluessiggas123 extends Crawler {
         // 1. Bestellmenge
         WebElement ausgabeBestellmengeM = driver.findElement(By.id("order_quantity"));
         preise.add(ausgabeBestellmengeM.getText());
-        System.out.println("Flüssiggas123 Bestellmenge: " + ausgabeBestellmengeM.getText());
+        //System.out.println("Flüssiggas123 Bestellmenge: " + ausgabeBestellmengeM.getText());
 
         // 2. Preis pro Liter in netto
         WebElement ausgabePreisProLiterM = driver.findElement(By.id("price_liter_net"));
@@ -80,15 +80,12 @@ public class Fluessiggas123 extends Crawler {
         // 1. Bestellmenge
         WebElement ausgabeBestellmengeG = driver.findElement(By.id("order_quantity"));
         preise.add(ausgabeBestellmengeG.getText());
-        System.out.println("Flüssiggas123 Bestellmenge: " + ausgabeBestellmengeG.getText());
+        //System.out.println("Flüssiggas123 Bestellmenge: " + ausgabeBestellmengeG.getText());
 
         // 2. Preis pro Liter in netto
         WebElement ausgabePreisProLiterG = driver.findElement(By.id("price_liter_net"));
         preise.add(ausgabePreisProLiterG.getText());
         System.out.println("Flüssiggas123 Preis pro Liter" + ausgabePreisProLiterG.getText());
-
-
-
         driver.close();
 
     }
