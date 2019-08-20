@@ -18,14 +18,6 @@ public class MeinFluessiggasWebcrawler extends Crawler{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,300)");
 
-        /*0,8-Tonnen-Container
-        driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[1]")).click();
-        waitForAction(3.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6677_chosen\"]/div/div/input")).sendKeys(plz);
-        waitForAction(2.0);
-        driver.findElement(By.id("options_2_text")).sendKeys("0");
-        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());*/
-
         //1,2-Tonnen-Container
         waitForAction(2.0);
         driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[2]")).click();
@@ -56,15 +48,7 @@ public class MeinFluessiggasWebcrawler extends Crawler{
 
     }
 
-    public static void waitForAction(final double time) {
-        try {
-            Thread.sleep((int) (time * 1000));
-        } catch (final InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }
-
 
 // System.setProperty("webdriver.chrome.driver",
 //System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
@@ -72,5 +56,11 @@ public class MeinFluessiggasWebcrawler extends Crawler{
 // chromeOptions.addArguments("--startup-maximized");// --headless   --startup-maximized
 // WebDriver driver = new ChromeDriver(chromeOptions);
 
-
+/*0,8-Tonnen-Container
+driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[1]")).click();
+waitForAction(3.0);
+driver.findElement(By.xpath("//*[@id=\"select_6677_chosen\"]/div/div/input")).sendKeys(plz);
+waitForAction(2.0);
+driver.findElement(By.id("options_2_text")).sendKeys("0");
+System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());*/
 
