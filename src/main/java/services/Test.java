@@ -17,22 +17,21 @@ public class Test {
 
     public static void programmStart() {
         System.out.println("Hi");
-    }
 
+    }
     public static void laufen() throws ParseException {
         Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 13);
-        today.set(Calendar.MINUTE, 26);
+        today.set(Calendar.HOUR_OF_DAY, 10);
+        today.set(Calendar.MINUTE, 45);
         today.set(Calendar.SECOND, 0);
         Timer timer = new Timer();
 
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                System.setProperty("webdriver.chrome.driver",
-                        "C:\\Users\\Viet\\Desktop\\ProjekteOrdner\\Webcrawler\\webcrawler-backend\\src\\main\\resources\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "C:\\Users\\Felix Weyer\\Desktop\\webCrawler\\chromedriver.exe");
                 ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--startup-maximized");// --headless   --startup-maximized
+                chromeOptions.addArguments("--headless");// --headless   --startup-maximized
                 WebDriver driver = new ChromeDriver(chromeOptions);
                 driver.get("https://pfiffiggas.de/#!/mein-preis");
                 Select element = new Select(driver.findElement(By.tagName("Select")));
