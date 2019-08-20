@@ -49,7 +49,7 @@ public class MeinFluessiggasWebcrawler extends Crawler{
         waitForAction(3.0);
         driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[4]")).click();
         waitForAction(2.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6680_chosen\"]/div/div/input")).sendKeys("50321");
+        driver.findElement(By.xpath("//*[@id=\"select_6680_chosen\"]/div/div/input")).sendKeys(plz);
         waitForAction(2.0);
         driver.findElement(By.id("options_2_text")).sendKeys("0");
         System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
