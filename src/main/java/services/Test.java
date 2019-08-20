@@ -17,13 +17,12 @@ public class Test {
 
     public static void programmStart() {
         System.out.println("Hi");
-
     }
 
     public static void laufen() throws ParseException {
         Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 10);
-        today.set(Calendar.MINUTE, 45);
+        today.set(Calendar.HOUR_OF_DAY, 13);
+        today.set(Calendar.MINUTE, 26);
         today.set(Calendar.SECOND, 0);
         Timer timer = new Timer();
 
