@@ -3,17 +3,18 @@ package services;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
-public abstract class Crawler {
+public abstract class Crawler{
 
     List<String>preise = new ArrayList<>();
 
-    public void start(int std, int min, int sek, String plz) throws ParseException {
+    public void start(int std, int min, int sek, String plz) throws ParseException, NoSuchElementException {
         Calendar today = Calendar.getInstance();
         today.set(Calendar.HOUR_OF_DAY, std);
         today.set(Calendar.MINUTE, min);
@@ -25,7 +26,7 @@ public abstract class Crawler {
         WebDriver driver = new ChromeDriver(chromeOptions);
         TimerTask timerTask = new TimerTask() {
             @Override
-            public void run() {
+            public void run() throws NoSuchElementException {
                 tankcrawlen(plz, driver, chromeOptions);
             }
         };
@@ -33,25 +34,26 @@ public abstract class Crawler {
     }
 
 
-    public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions);
+    public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException;
 
-    public void allePLZCrawlen() throws ParseException {
-        start(9, 01, 0, "51570");
-        start(10, 02, 0, "52152");
-        start(11, 03, 0, "53804");
-        start(13, 04, 0, "54290");
-        start(14, 05, 0, "55543");
-        start(15, 06, 0, "56072");
-        start(16, 07, 0, "57539");
-        start(17, 8, 0, "58119");
+    public void allePLZCrawlen() throws ParseException,NoSuchElementException {
+        start(16, 07, 0, "51570");
+        start(16, 8, 0, "52152");
+        start(16, 9, 0, "53804");
+        start(16, 10, 0, "54290");
+        start(16, 11, 0, "55543");
+        start(16, 12, 0, "56072");
+        start(16, 13, 0, "57539");
+        start(16, 14, 0, "58119");
 
     }
-    
+
     public static void waitForAction(final double time) {
         try {
             Thread.sleep((int) (time * 1000));
         } catch (final InterruptedException e) {
             e.printStackTrace();
+
         }
     }
 }
