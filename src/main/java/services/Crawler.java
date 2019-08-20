@@ -37,13 +37,13 @@ public abstract class Crawler {
 
     public void allePLZCrawlen() throws ParseException {
         start(14, 50, 0, "51570");
-        start(14, 51, 0, "52152");
+   /*     start(14, 51, 0, "52152");
         start(14, 52, 0, "53804");
         start(14, 53, 0, "54290");
         start(14, 54, 0, "55543");
         start(14, 55, 0, "56072");
         start(14, 56, 0, "57539");
-        start(14, 57, 0, "58119");
+        start(14, 57, 0, "58119");*/
 
     }
 
