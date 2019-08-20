@@ -8,14 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Service;
-
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class MeinFluessiggasWebcrawler {
-
 
     public static void laufen() throws ParseException {
         Calendar today = Calendar.getInstance();
