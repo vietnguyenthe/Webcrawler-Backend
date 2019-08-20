@@ -8,8 +8,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
 
 
 @Service
@@ -20,10 +22,10 @@ public class Fluessiggas123Webcrawler {
     String [] plzListe = {"50129", "50189", "50354", "51371", "51545", "51645",
         "52072", "52222", "52372", "53050", "53173", "53359"  };
     Random r = new Random();
-//    String plz = "50321";
 
     String fuellstand = "30";
 
+    // Variablen je nach Webseite anpassen. Nach Element ID suchen!
     String behaelterKleinId = "behaelter1";
     String behaelterMittelId = "behaelter2";
     String behaelterGroßId = "behaelter3";
@@ -33,6 +35,7 @@ public class Fluessiggas123Webcrawler {
     String ausgabeBestellmengeId ="order_quantity";
     String ausgabePreisProLiterId ="price_liter_net";
 
+    // Variablen die zur Speicherung der ausgelesenen Daten nötig sind
     String bestellmenge = "";
     String preisProLiterNetto = "";
 
@@ -45,7 +48,9 @@ public class Fluessiggas123Webcrawler {
     public WebDriver starteDriver (){
         // Starte Chrome und Startseite
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\src\\main\\resources\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get(url);
         return driver;
     }
@@ -60,8 +65,6 @@ public class Fluessiggas123Webcrawler {
         fluessiggas123Webcrawler.bestellmengeAuswaehlen();
         fluessiggas123Webcrawler.liefermengenAusgabe();
         fluessiggas123Webcrawler.preisAusgabe();
-
-
 
         // Zweites mal durchgehen aber diesmal die mittlere Behältergröße auswählen
         fluessiggas123Webcrawler.behaelterGroesseAuswaehlen(behaelterMittelId);
@@ -177,7 +180,6 @@ public class Fluessiggas123Webcrawler {
         System.out.println(preisProLiterNetto);
     }
 */
-
 
     public static void waitForAction(final double time) {
         try {
