@@ -1,71 +1,48 @@
 package services;
 
-import org.graalvm.compiler.replacements.arraycopy.ArrayCopyWithSlowPathNode;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Service;
-import java.text.ParseException;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @Service
-public class MeinFluessiggasWebcrawler {
+public class MeinFluessiggasWebcrawler extends Crawler{
 
-    public static void laufen() throws ParseException {
-        Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 8);
-        today.set(Calendar.MINUTE, 26);
-        today.set(Calendar.SECOND, 0);
-        Timer timer = new Timer();
 
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                crawlen();
-            }
-        };
-        timer.scheduleAtFixedRate(timerTask, today.getTime(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
-    }
-
-    public static void crawlen() {
-        System.setProperty("webdriver.chrome.driver",
-                System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--startup-maximized");// --headless   --startup-maximized
-        WebDriver driver = new ChromeDriver(chromeOptions);
+    @Override
+    public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) {
         driver.get("https://www.meinfluessiggas.de/");
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,300)");
 
-        //0,8-Tonnen-Container
+        /*0,8-Tonnen-Container
         driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[1]")).click();
         waitForAction(3.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6677_chosen\"]/div/div/input")).sendKeys("50321");
+        driver.findElement(By.xpath("//*[@id=\"select_6677_chosen\"]/div/div/input")).sendKeys(plz);
         waitForAction(2.0);
         driver.findElement(By.id("options_2_text")).sendKeys("0");
-        System.out.println("0,8t: " + driver.findElement(By.id("priceNetto")).getText());
+        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());*/
 
         //1,2-Tonnen-Container
         waitForAction(2.0);
         driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[2]")).click();
         waitForAction(2.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6678_chosen\"]/div/div/input")).sendKeys("50321");
+        driver.findElement(By.xpath("//*[@id=\"select_6678_chosen\"]/div/div/input")).sendKeys(plz);
         waitForAction(2.0);
         driver.findElement(By.id("options_2_text")).sendKeys("0");
-        System.out.println("1,2t: " + driver.findElement(By.id("priceNetto")).getText());
+        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
 
         //2,1-Tonnen-Container
         waitForAction(3.0);
         driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[3]")).click();
         waitForAction(2.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6679_chosen\"]/div/div/input")).sendKeys("50321");
+        driver.findElement(By.xpath("//*[@id=\"select_6679_chosen\"]/div/div/input")).sendKeys(plz);
         waitForAction(2.0);
         driver.findElement(By.id("options_2_text")).sendKeys("0");
-        System.out.println("2,1t: " + driver.findElement(By.id("priceNetto")).getText());
+        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
 
         //2,9-Tonnen-Container
         waitForAction(3.0);
@@ -74,7 +51,8 @@ public class MeinFluessiggasWebcrawler {
         driver.findElement(By.xpath("//*[@id=\"select_6680_chosen\"]/div/div/input")).sendKeys("50321");
         waitForAction(2.0);
         driver.findElement(By.id("options_2_text")).sendKeys("0");
-        System.out.println("2,9t: " + driver.findElement(By.id("priceNetto")).getText());
+        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
+
     }
 
     public static void waitForAction(final double time) {
@@ -85,3 +63,13 @@ public class MeinFluessiggasWebcrawler {
         }
     }
 }
+
+
+// System.setProperty("webdriver.chrome.driver",
+//System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
+//ChromeOptions chromeOptions = new ChromeOptions();
+// chromeOptions.addArguments("--startup-maximized");// --headless   --startup-maximized
+// WebDriver driver = new ChromeDriver(chromeOptions);
+
+
+
