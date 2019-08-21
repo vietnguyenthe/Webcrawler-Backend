@@ -1,12 +1,10 @@
 package services;
 
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,43 +17,27 @@ public class MeinFluessiggasWebcrawler extends Crawler{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,300)");
 
-        /*0,8-Tonnen-Container
-        driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[1]")).click();
-        waitForAction(3.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6677_chosen\"]/div/div/input")).sendKeys(plz);
-        waitForAction(2.0);
-        driver.findElement(By.id("options_2_text")).sendKeys("0");
-        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());*/
+        
 
-        //1,2-Tonnen-Container
-        waitForAction(2.0);
-        driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[2]")).click();
-        waitForAction(2.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6678_chosen\"]/div/div/input")).sendKeys(plz);
-        waitForAction(2.0);
-        driver.findElement(By.id("options_2_text")).sendKeys("0");
-        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
-
-        //2,1-Tonnen-Container
+        //Plz und Füllstand eintragen die preise sind für alle drei Tankgrößen identisch Füllstand bei 30%
         waitForAction(3.0);
-        driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[3]")).click();
+        driver.findElement(By.cssSelector("input[placeholder='Ihre PLZ']")).click();
         waitForAction(2.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6679_chosen\"]/div/div/input")).sendKeys(plz);
+        driver.findElement(By.cssSelector("input[placeholder='Ihre PLZ']")).sendKeys(plz);
         waitForAction(2.0);
-        driver.findElement(By.id("options_2_text")).sendKeys("0");
+        waitForAction(2.0);
+        driver.findElement(By.id("options_2_text")).sendKeys("30");
         System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
+        waitForAction(1.0);
+        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
+        waitForAction(1.0);
+        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
+        driver.findElement(By.cssSelector("input[placeholder='Ihre PLZ']")).click();
+        waitForAction(1.0);
+        driver.findElement(By.cssSelector("input[placeholder='Ihre PLZ']")).sendKeys(" ");
+        waitForAction(2);
 
-        //2,9-Tonnen-Container
-        waitForAction(3.0);
-        driver.findElement(By.xpath("//*[@id=\"product-options-wrapper\"]/div[5]/div[1]/div[4]")).click();
-        waitForAction(2.0);
-        driver.findElement(By.xpath("//*[@id=\"select_6680_chosen\"]/div/div/input")).sendKeys(plz);
-        waitForAction(2.0);
-        driver.findElement(By.id("options_2_text")).sendKeys("0");
-        System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
-        driver.close();
     }
-
     public static void waitForAction(final double time) {
         try {
             Thread.sleep((int) (time * 1000));
