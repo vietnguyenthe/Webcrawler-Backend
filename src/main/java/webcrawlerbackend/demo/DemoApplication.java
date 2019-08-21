@@ -1,8 +1,10 @@
 package webcrawlerbackend.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.reactive.context.ConfigurableReactiveWebApplicationContext;
+import repositories.MeinFluessiggasRepository;
 import services.Crawler;
 import services.Fluessiggas123;
 import services.MeinFluessiggasWebcrawler;
@@ -16,7 +18,6 @@ import org.openqa.selenium.NoSuchElementException;
 public class DemoApplication {
 
     public static void main(String[] args) {
-
 
         SpringApplication.run(DemoApplication.class, args);
         PfiffiggasWebcrawler pfiffiggasWebcrawler = new PfiffiggasWebcrawler();
