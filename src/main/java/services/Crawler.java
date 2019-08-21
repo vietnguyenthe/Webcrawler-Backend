@@ -22,7 +22,7 @@ public abstract class Crawler{
         Timer timer = new Timer();
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--startup-maximized");
+        chromeOptions.addArguments("--headless");
         WebDriver driver = new ChromeDriver(chromeOptions);
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -38,13 +38,13 @@ public abstract class Crawler{
 
     public void allePLZCrawlen() throws ParseException,NoSuchElementException {
         start(9, 07, 0, "51570");
-        /*start(9, 8, 0, "52152");
+        start(9, 8, 0, "52152");
         start(9, 9, 0, "53804");
         start(9, 10, 0, "54290");
         start(9, 11, 0, "55543");
         start(9, 12, 0, "56072");
         start(9, 13, 0, "57539");
-        start(9, 14, 0, "58119");*/
+        start(9, 14, 0, "58119");
 
     }
 

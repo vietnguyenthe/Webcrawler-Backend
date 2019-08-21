@@ -24,9 +24,9 @@ public class DemoApplication {
         Fluessiggas123 fluessiggas123 = new Fluessiggas123();
 
         try {
-            //pfiffiggasWebcrawler.allePLZCrawlen();
+            pfiffiggasWebcrawler.allePLZCrawlen();
             meinFluessiggasWebcrawler.allePLZCrawlen();
-            //fluessiggas123.allePLZCrawlen();
+            fluessiggas123.allePLZCrawlen();
 
         } catch (NoSuchElementException e) {
             e.printStackTrace();
