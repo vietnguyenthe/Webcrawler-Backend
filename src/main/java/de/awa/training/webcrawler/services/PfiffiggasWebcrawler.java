@@ -22,6 +22,11 @@ public class PfiffiggasWebcrawler extends Crawler{
     @Autowired
     PfiffiggasRepository repository;
 
+    private final int UnternehmensID = 1;
+
+    public int getUnternehmensID() {
+        return UnternehmensID;
+    }
 
     public void tankcrawlen(String plz,WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
 

@@ -2,8 +2,10 @@ package de.awa.training.webcrawler.services;
 
 import de.awa.training.webcrawler.entity.EntityInterface;
 import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
+import de.awa.training.webcrawler.entity.UnternehmenEntity;
 import de.awa.training.webcrawler.repository.PLZRepository;
 import de.awa.training.webcrawler.repository.PfiffiggasRepository;
+import de.awa.training.webcrawler.repository.UnternehemensRepository;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,6 +24,11 @@ public abstract class Crawler{
 
     @Autowired
     PLZRepository plzRepository;
+
+    @Autowired
+    UnternehemensRepository unternehemensRepository;
+
+    private int UnternehmensID;
 
     public void start(int std, int min, int sek, String plz) throws ParseException, NoSuchElementException {
         Calendar today = Calendar.getInstance();
@@ -46,14 +53,14 @@ public abstract class Crawler{
     public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException;
 
     public void allePLZCrawlen() throws ParseException,NoSuchElementException {
-        start(9, 07, 0, "51570");
-        /*start(9, 8, 0, "52152");
-        start(9, 9, 0, "53804");
-        start(9, 10, 0, "54290");
-        start(9, 11, 0, "55543");
-        start(9, 12, 0, "56072");
-        start(9, 13, 0, "57539");
-        start(9, 14, 0, "58119");*/
+        start(18, 24, 0, "51570");
+        start(18, 25, 0, "52152");
+        start(18, 26, 0, "53804");
+        start(18, 27, 0, "54290");
+        start(18, 28, 0, "55543");
+        start(18, 29, 0, "56072");
+        start(18, 30, 0, "57539");
+        start(18, 31, 0, "58119");
 
     }
 
@@ -63,12 +70,14 @@ public abstract class Crawler{
                                            String preis4850,
                                            String preis6400,
                                            String plz){
-        Date date = new Date(12);
+
+        Date date = new Date(new java.util.Date().getTime());
         Integer plzID = suchePLZ(plz);
         entityInterface.setPreis2700Liter(preis2700);
         entityInterface.setPreis4850Liter(preis4850);
         entityInterface.setPreis6400Liter(preis6400);
         entityInterface.setPostleitzahlenId(plzID);
+        entityInterface.setUnternehmenId(getUnternehmensID());
         entityInterface.setDatum(date);
         repository.save(entityInterface);
     }
@@ -84,6 +93,7 @@ public abstract class Crawler{
         return plzID;
     }
 
+
     public static void waitForAction(final double time) {
         try {
             Thread.sleep((int) (time * 1000));
@@ -92,4 +102,6 @@ public abstract class Crawler{
 
         }
     }
+
+    public abstract int getUnternehmensID();
 }

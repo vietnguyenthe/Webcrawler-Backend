@@ -58,21 +58,23 @@ public class DemoApplication {
         }
 
         if(unternehemensRepository.findAll().isEmpty()){
+            Integer i = Integer.valueOf(1);
             for (String[]einezelnesUnternehmen:unternehmen) {
                     UnternehmenEntity entity = new UnternehmenEntity();
+                    entity.setId(i);
                     entity.setName(einezelnesUnternehmen[0]);
                     entity.setAdresse(einezelnesUnternehmen[1]);
                     entity.setPlz(einezelnesUnternehmen[2]);
                     entity.setOrt(einezelnesUnternehmen[3]);
                     unternehemensRepository.save(entity);
+                    i++;
                 }
             }
 
         try {
             pfiffiggasWebcrawler.allePLZCrawlen();
-            //meinFluessiggasWebcrawler.allePLZCrawlen();
-            //fluessiggas123.allePLZCrawlen();
-
+            meinFluessiggasWebcrawler.allePLZCrawlen();
+            fluessiggas123.allePLZCrawlen();
         } catch (NoSuchElementException e) {
             e.printStackTrace();
             System.out.println("Fehler! Crawler nicht erfolgreich");

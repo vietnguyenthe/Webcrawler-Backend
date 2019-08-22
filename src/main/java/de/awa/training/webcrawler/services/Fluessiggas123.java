@@ -19,7 +19,11 @@ public class Fluessiggas123 extends Crawler {
     @Autowired
     Fluessiggas123Repository repository;
 
+    private final int UnternehmensID = 3;
 
+    public int getUnternehmensID() {
+        return UnternehmensID;
+    }
     @Override
     public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
 

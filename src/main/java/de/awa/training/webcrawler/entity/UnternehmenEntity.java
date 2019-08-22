@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class UnternehmenEntity {
 
     @Id
-    @GeneratedValue
     private Integer id;
+
     private String name;
     private String adresse;
     private String plz;
