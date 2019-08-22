@@ -1,15 +1,20 @@
 package de.awa.training.webcrawler.services;
 
+import de.awa.training.webcrawler.repository.PfiffiggasRepository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PfiffiggasWebcrawler extends Crawler{
+
+    @Autowired
+    PfiffiggasRepository pfiffiggasRepository;
 
 
     public void tankcrawlen(String plz,WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
@@ -39,6 +44,11 @@ public class PfiffiggasWebcrawler extends Crawler{
         System.out.println("PfiffiggasPreis "+ text.getText());
         preise.add(text.getText());
         waitForAction(2.0);
+
+
+        
+
+
         driver.close();
    }
 
