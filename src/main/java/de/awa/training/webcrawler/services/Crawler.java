@@ -57,18 +57,32 @@ public abstract class Crawler{
 
     }
 
-    public void preiseInDatenbankschreiben(JpaRepository repository, EntityInterface entityInterface, String preis2700, String preis4850, String preis6400, String plz){
+    public void preiseInDatenbankschreiben(JpaRepository repository,
+                                           EntityInterface entityInterface,
+                                           String preis2700,
+                                           String preis4850,
+                                           String preis6400,
+                                           String plz){
         Date date = new Date(12);
-        Integer id = plzRepository.findAllByPlz(plz);
+        Integer plzID = suchePLZ(plz);
         entityInterface.setPreis2700Liter(preis2700);
         entityInterface.setPreis4850Liter(preis4850);
         entityInterface.setPreis6400Liter(preis6400);
-        entityInterface.setPostleitzahlenId(id);
+        entityInterface.setPostleitzahlenId(plzID);
         entityInterface.setDatum(date);
-
         repository.save(entityInterface);
     }
 
+    public Integer suchePLZ(String plz){
+        List<PostleitzahlenEntity> liste = plzRepository.findAll();
+        Integer plzID = null;
+        for (PostleitzahlenEntity element: liste) {
+            if(element.getPlz().equals(plz)){
+                plzID = element.getId();
+            }
+        }
+        return plzID;
+    }
 
     public static void waitForAction(final double time) {
         try {

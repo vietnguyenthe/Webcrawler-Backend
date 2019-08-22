@@ -13,9 +13,10 @@ public class PostleitzahlenEntity {
     private Integer id;
     private String plz;
 
-    @OneToOne(mappedBy = "pfiffiggas")
+    /*
+    @OneToMany(mappedBy = "pfiffiggas")
     private List<PfiffiggasEntity> entity = new ArrayList<>();
-
+    */
     @Column(name = "ID")
     public Integer getId() {
         return id;

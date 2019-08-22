@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface PLZRepository extends JpaRepository<PostleitzahlenEntity,Integer> {
 
-    @Query("SELECT id from postleitzahlen WHERE plz=?1")
-    Integer findAllByPlz(String PLZ);
+    //@Query(value="SELECT id from postleitzahlen WHERE plz=?1")
+    //Integer findAllByPLZZ(String PLZ);
 }
