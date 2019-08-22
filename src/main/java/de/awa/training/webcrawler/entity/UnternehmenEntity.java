@@ -5,19 +5,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "unternehmen", schema = "fluessiggascrawler", catalog = "")
 public class UnternehmenEntity {
+
+    @Id
+    @GeneratedValue
     private Integer id;
     private String name;
     private String adresse;
     private String plz;
     private String ort;
 
-    @Id
+
     @Column(name = "ID")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -5,12 +5,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "postleitzahlen", schema = "fluessiggascrawler", catalog = "")
 public class PostleitzahlenEntity {
+
+    @Id
+    @GeneratedValue
     private Integer id;
     private String plz;
 
-    @Id
+
     @Column(name = "ID")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
