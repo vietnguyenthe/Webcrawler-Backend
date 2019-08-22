@@ -56,7 +56,6 @@ public class DemoApplication {
                 plzRepository.save(entity);
             }
         }
-
         if(unternehemensRepository.findAll().isEmpty()){
             Integer i = Integer.valueOf(1);
             for (String[]einezelnesUnternehmen:unternehmen) {
