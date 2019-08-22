@@ -14,9 +14,12 @@ public class PfiffiggasEntity implements EntityInterface{
     private String preis2700Liter;
     private String preis4850Liter;
     private String preis6400Liter;
-
     private Date datum;
+
+    @ManyToOne
+    @JoinColumn
     private Integer postleitzahlenId;
+
     private Integer unternehmenId;
 
 

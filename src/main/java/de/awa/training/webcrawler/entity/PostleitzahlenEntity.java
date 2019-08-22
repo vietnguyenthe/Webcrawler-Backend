@@ -1,6 +1,8 @@
 package de.awa.training.webcrawler.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "postleitzahlen", schema = "fluessiggascrawler", catalog = "")
@@ -11,6 +13,8 @@ public class PostleitzahlenEntity {
     private Integer id;
     private String plz;
 
+    @OneToOne(mappedBy = "pfiffiggas")
+    private List<PfiffiggasEntity> entity = new ArrayList<>();
 
     @Column(name = "ID")
     public Integer getId() {

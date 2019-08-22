@@ -45,7 +45,7 @@ public class MeinFluessiggasWebcrawler extends Crawler {
         driver.close();
 
         MeinfluessiggasEntity entity = new MeinfluessiggasEntity();
-        preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400);
+        //preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400,plz);
     }
 
 

@@ -106,6 +106,6 @@ public class Fluessiggas123 extends Crawler {
         driver.close();
 
         Fluessiggas123Entity entity = new Fluessiggas123Entity();
-        preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400);
+       // preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400);
     }
 }

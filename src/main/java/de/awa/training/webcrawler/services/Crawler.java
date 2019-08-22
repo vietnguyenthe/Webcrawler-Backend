@@ -1,6 +1,8 @@
 package de.awa.training.webcrawler.services;
 
 import de.awa.training.webcrawler.entity.EntityInterface;
+import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
+import de.awa.training.webcrawler.repository.PLZRepository;
 import de.awa.training.webcrawler.repository.PfiffiggasRepository;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,8 +17,11 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
+
 public abstract class Crawler{
 
+    @Autowired
+    PLZRepository plzRepository;
 
     public void start(int std, int min, int sek, String plz) throws ParseException, NoSuchElementException {
         Calendar today = Calendar.getInstance();
@@ -52,12 +57,15 @@ public abstract class Crawler{
 
     }
 
-    public void preiseInDatenbankschreiben(JpaRepository repository, EntityInterface entityInterface, String preis2700, String preis4850, String preis6400){
+    public void preiseInDatenbankschreiben(JpaRepository repository, EntityInterface entityInterface, String preis2700, String preis4850, String preis6400, String plz){
         Date date = new Date(12);
+        Integer id = plzRepository.findAllByPlz(plz);
         entityInterface.setPreis2700Liter(preis2700);
         entityInterface.setPreis4850Liter(preis4850);
         entityInterface.setPreis6400Liter(preis6400);
+        entityInterface.setPostleitzahlenId(id);
         entityInterface.setDatum(date);
+
         repository.save(entityInterface);
     }
 
