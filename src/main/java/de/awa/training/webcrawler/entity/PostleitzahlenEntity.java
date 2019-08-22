@@ -1,16 +1,24 @@
 package de.awa.training.webcrawler.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "postleitzahlen", schema = "fluessiggascrawler", catalog = "")
 public class PostleitzahlenEntity {
+
+    @Id
+    @GeneratedValue
     private Integer id;
     private String plz;
 
-    @Id
+    /*
+    @OneToMany(mappedBy = "pfiffiggas")
+    private List<PfiffiggasEntity> entity = new ArrayList<>();
+    */
     @Column(name = "ID")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

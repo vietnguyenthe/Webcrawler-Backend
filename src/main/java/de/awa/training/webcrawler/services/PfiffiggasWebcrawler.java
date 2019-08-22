@@ -22,6 +22,11 @@ public class PfiffiggasWebcrawler extends Crawler{
     @Autowired
     PfiffiggasRepository repository;
 
+    private final int UnternehmensID = 1;
+
+    public int getUnternehmensID() {
+        return UnternehmensID;
+    }
 
     public void tankcrawlen(String plz,WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
 
@@ -58,7 +63,7 @@ public class PfiffiggasWebcrawler extends Crawler{
         driver.close();
 
         PfiffiggasEntity pfiffiggasEntity = new PfiffiggasEntity();
-        preiseInDatenbankschreiben(repository,pfiffiggasEntity,preis2700,preis4850,preis6400);
+        preiseInDatenbankschreiben(repository,pfiffiggasEntity,preis2700,preis4850,preis6400,plz);
 
    }
 

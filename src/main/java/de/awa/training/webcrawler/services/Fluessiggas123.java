@@ -15,10 +15,15 @@ import org.openqa.selenium.NoSuchElementException;
 @Service
 public class Fluessiggas123 extends Crawler {
 
+
     @Autowired
     Fluessiggas123Repository repository;
 
+    private final int UnternehmensID = 3;
 
+    public int getUnternehmensID() {
+        return UnternehmensID;
+    }
     @Override
     public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
 
@@ -106,6 +111,6 @@ public class Fluessiggas123 extends Crawler {
         driver.close();
 
         Fluessiggas123Entity entity = new Fluessiggas123Entity();
-        preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400);
+        preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400,plz);
     }
 }
