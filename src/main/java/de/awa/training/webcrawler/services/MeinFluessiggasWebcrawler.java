@@ -1,10 +1,9 @@
-package services;
+package de.awa.training.webcrawler.services;
 
 
 import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Service;
 
 @Service

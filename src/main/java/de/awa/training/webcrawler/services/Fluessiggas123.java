@@ -1,4 +1,4 @@
-package services;
+package de.awa.training.webcrawler.services;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

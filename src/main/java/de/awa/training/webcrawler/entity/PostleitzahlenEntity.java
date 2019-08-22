@@ -1,11 +1,11 @@
-package entity;
+package de.awa.training.webcrawler.entity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "postleitzahlen", schema = "fluessiggascrawler", catalog = "")
 public class PostleitzahlenEntity {
-    private int id;
+    private Integer id;
     private String plz;
 
     @Id

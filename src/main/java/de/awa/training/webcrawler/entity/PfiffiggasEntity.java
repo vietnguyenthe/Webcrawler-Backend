@@ -1,4 +1,4 @@
-package entity;
+package de.awa.training.webcrawler.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -6,7 +6,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "pfiffiggas", schema = "fluessiggascrawler", catalog = "")
 public class PfiffiggasEntity {
-    private int id;
+    private Integer id;
     private String preis2700Liter;
     private String preis4850Liter;
     private String preis6400Liter;

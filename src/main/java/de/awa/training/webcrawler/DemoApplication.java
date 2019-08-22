@@ -1,12 +1,10 @@
-package webcrawlerbackend.demo;
+package de.awa.training.webcrawler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.reactive.context.ConfigurableReactiveWebApplicationContext;
-import services.Crawler;
-import services.Fluessiggas123;
-import services.MeinFluessiggasWebcrawler;
-import services.PfiffiggasWebcrawler;
+import de.awa.training.webcrawler.services.Fluessiggas123;
+import de.awa.training.webcrawler.services.MeinFluessiggasWebcrawler;
+import de.awa.training.webcrawler.services.PfiffiggasWebcrawler;
 
 import java.text.ParseException;
 import org.openqa.selenium.NoSuchElementException;

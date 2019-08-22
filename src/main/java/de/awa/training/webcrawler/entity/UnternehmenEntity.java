@@ -1,15 +1,15 @@
-package entity;
+package de.awa.training.webcrawler.entity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "unternehmen", schema = "fluessiggascrawler", catalog = "")
 public class UnternehmenEntity {
-    private int id;
-    private Object name;
-    private Object adresse;
+    private Integer id;
+    private String name;
+    private String adresse;
     private String plz;
-    private Object ort;
+    private String ort;
 
     @Id
     @Column(name = "ID")
@@ -23,21 +23,21 @@ public class UnternehmenEntity {
 
     @Basic
     @Column(name = "Name")
-    public Object getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Object name) {
+    public void setName(String name) {
         this.name = name;
     }
 
     @Basic
     @Column(name = "Adresse")
-    public Object getAdresse() {
+    public String getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(Object adresse) {
+    public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
 
@@ -53,11 +53,11 @@ public class UnternehmenEntity {
 
     @Basic
     @Column(name = "Ort")
-    public Object getOrt() {
+    public String getOrt() {
         return ort;
     }
 
-    public void setOrt(Object ort) {
+    public void setOrt(String ort) {
         this.ort = ort;
     }
 
