@@ -7,8 +7,12 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "fluessiggas123", schema = "fluessiggascrawler", catalog = "")
-public class Fluessiggas123Entity {
+public class Fluessiggas123Entity implements EntityInterface {
+
+    @Id
+    @GeneratedValue
     private Integer id;
+
     private String preis2700Liter;
     private String preis4850Liter;
     private String preis6400Liter;
@@ -16,13 +20,12 @@ public class Fluessiggas123Entity {
     private Integer postleitzahlenId;
     private Integer unternehmenId;
 
-    @Id
     @Column(name = "ID")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

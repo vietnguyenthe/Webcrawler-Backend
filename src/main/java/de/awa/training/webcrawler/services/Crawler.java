@@ -1,10 +1,15 @@
 package de.awa.training.webcrawler.services;
 
+import de.awa.training.webcrawler.entity.EntityInterface;
+import de.awa.training.webcrawler.repository.PfiffiggasRepository;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.NoSuchElementException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Crawler{
 
-    List<String>preise = new ArrayList<>();
 
     public void start(int std, int min, int sek, String plz) throws ParseException, NoSuchElementException {
         Calendar today = Calendar.getInstance();
@@ -38,15 +42,27 @@ public abstract class Crawler{
 
     public void allePLZCrawlen() throws ParseException,NoSuchElementException {
         start(9, 07, 0, "51570");
-        start(9, 8, 0, "52152");
+        /*start(9, 8, 0, "52152");
         start(9, 9, 0, "53804");
         start(9, 10, 0, "54290");
         start(9, 11, 0, "55543");
         start(9, 12, 0, "56072");
         start(9, 13, 0, "57539");
-        start(9, 14, 0, "58119");
+        start(9, 14, 0, "58119");*/
 
     }
+
+    public void preiseInDatenbankschreiben(JpaRepository repository, EntityInterface entityInterface, String preis2700, String preis4850, String preis6400){
+
+        Date date = new Date(12);
+        entityInterface.setPreis2700Liter(preis2700);
+        entityInterface.setPreis4850Liter(preis4850);
+        entityInterface.setPreis6400Liter(preis6400);
+        entityInterface.setDatum(date);
+        repository.save(entityInterface);
+
+    }
+
 
     public static void waitForAction(final double time) {
         try {

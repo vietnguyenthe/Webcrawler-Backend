@@ -1,13 +1,18 @@
 package de.awa.training.webcrawler.services;
 
 
+import de.awa.training.webcrawler.repository.MeinFluessiggasRepository;
 import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MeinFluessiggasWebcrawler extends Crawler{
+public class MeinFluessiggasWebcrawler extends Crawler {
+
+    @Autowired
+    MeinFluessiggasRepository meinFluessiggasRepository;
 
 
     @Override
@@ -30,14 +35,11 @@ public class MeinFluessiggasWebcrawler extends Crawler{
         waitForAction(1.0);
         driver.close();
     }
-    public static void waitForAction(final double time) {
-        try {
-            Thread.sleep((int) (time * 1000));
-        } catch (final InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
+
+
 }
+
 
 
 // System.setProperty("webdriver.chrome.driver",
