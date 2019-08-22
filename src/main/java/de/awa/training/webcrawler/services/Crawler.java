@@ -53,14 +53,12 @@ public abstract class Crawler{
     }
 
     public void preiseInDatenbankschreiben(JpaRepository repository, EntityInterface entityInterface, String preis2700, String preis4850, String preis6400){
-
         Date date = new Date(12);
         entityInterface.setPreis2700Liter(preis2700);
         entityInterface.setPreis4850Liter(preis4850);
         entityInterface.setPreis6400Liter(preis6400);
         entityInterface.setDatum(date);
         repository.save(entityInterface);
-
     }
 
 

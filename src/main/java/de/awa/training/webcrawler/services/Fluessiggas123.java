@@ -1,10 +1,13 @@
 package de.awa.training.webcrawler.services;
 
+import de.awa.training.webcrawler.entity.Fluessiggas123Entity;
+import de.awa.training.webcrawler.repository.Fluessiggas123Repository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -12,8 +15,16 @@ import org.openqa.selenium.NoSuchElementException;
 @Service
 public class Fluessiggas123 extends Crawler {
 
+    @Autowired
+    Fluessiggas123Repository repository;
+
+
     @Override
     public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
+
+        String preis2700;
+        String preis4850;
+        String preis6400;
 
         driver.get("https://www.123-fluessiggas.de/");
         // JavascriptExector hilft beim Runterscrollen der Seite, weil ansonsten Silenium die unteren Elemente nicht anklicken kann
@@ -47,6 +58,7 @@ public class Fluessiggas123 extends Crawler {
         WebElement ausgabePreisProLiter = driver.findElement(By.id("price_liter_net"));
         //preise.add(ausgabePreisProLiter.getText());
         System.out.println("Flüssiggas123 Preis pro Liter" + ausgabePreisProLiter.getText());
+        preis2700 = ausgabePreisProLiter.getText();
 
 
         // FÜR MITTLEREN BEHÄLTER
@@ -67,6 +79,8 @@ public class Fluessiggas123 extends Crawler {
         WebElement ausgabePreisProLiterM = driver.findElement(By.id("price_liter_net"));
         //preise.add(ausgabePreisProLiterM.getText());
         System.out.println("Flüssiggas123 Preis pro Liter" + ausgabePreisProLiterM.getText());
+        preis4850 = ausgabePreisProLiterM.getText();
+
 
 
 
@@ -88,7 +102,10 @@ public class Fluessiggas123 extends Crawler {
         WebElement ausgabePreisProLiterG = driver.findElement(By.id("price_liter_net"));
         //preise.add(ausgabePreisProLiterG.getText());
         System.out.println("Flüssiggas123 Preis pro Liter" + ausgabePreisProLiterG.getText());
+        preis6400 = ausgabePreisProLiterG.getText();
         driver.close();
 
+        Fluessiggas123Entity entity = new Fluessiggas123Entity();
+        preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400);
     }
 }

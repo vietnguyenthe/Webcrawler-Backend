@@ -1,6 +1,7 @@
 package de.awa.training.webcrawler.services;
 
 
+import de.awa.training.webcrawler.entity.MeinfluessiggasEntity;
 import de.awa.training.webcrawler.repository.MeinFluessiggasRepository;
 import org.openqa.selenium.*;
 
@@ -12,11 +13,16 @@ import org.springframework.stereotype.Service;
 public class MeinFluessiggasWebcrawler extends Crawler {
 
     @Autowired
-    MeinFluessiggasRepository meinFluessiggasRepository;
+    MeinFluessiggasRepository repository;
 
 
     @Override
     public void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException {
+
+        String preis2700;
+        String preis4850;
+        String preis6400;
+
         driver.get("https://www.meinfluessiggas.de/");
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,300)");
@@ -32,8 +38,14 @@ public class MeinFluessiggasWebcrawler extends Crawler {
         System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
         waitForAction(1.0);
         System.out.println("MeinFlüssiggas " + driver.findElement(By.id("priceNetto")).getText());
+        preis2700 = driver.findElement(By.id("priceNetto")).getText();
+        preis4850 = driver.findElement(By.id("priceNetto")).getText();
+        preis6400 = driver.findElement(By.id("priceNetto")).getText();
         waitForAction(1.0);
         driver.close();
+
+        MeinfluessiggasEntity entity = new MeinfluessiggasEntity();
+        preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400);
     }
 
 
