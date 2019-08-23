@@ -1,7 +1,7 @@
 package de.awa.training.webcrawler.controller;
 
 import de.awa.training.webcrawler.model.Daten;
-import de.awa.training.webcrawler.model.Test;
+import de.awa.training.webcrawler.model.Anfrage;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class AnfragenController {
 
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/preis/anfrage")
-    public List<Daten> anfrageerhalten(@RequestBody Test test){
+    public List<Daten> anfrageerhalten(@RequestBody Anfrage test){
         System.out.println(test.getBehaelter());
         System.out.println(test.getPlz());
         List<Daten> liste = new ArrayList<>();

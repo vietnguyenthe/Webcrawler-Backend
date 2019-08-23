@@ -1,6 +1,6 @@
 package de.awa.training.webcrawler.model;
 
-public class Test {
+public class Anfrage {
 
    public String behaelter;
    public String plz;
