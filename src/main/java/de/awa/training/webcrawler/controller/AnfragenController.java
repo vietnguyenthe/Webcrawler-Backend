@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -67,9 +70,11 @@ public class AnfragenController {
     }
 
     public String holePreisausEntitytabelle(JpaRepository repository, Integer plzID, Integer tankgröße){
-        List<EntityInterface> liste = repository.findAll();
+        List<EntityInterface> sortierteListe = sortiereAbsteigend(repository);
+
         List<String> leereListe = new ArrayList<>();
-        for (EntityInterface entity:liste){
+
+        for (EntityInterface entity:sortierteListe){
             if(entity.getPostleitzahlenId().equals(plzID)){
                 leereListe.add(entity.getPreis2700Liter());
                 leereListe.add(entity.getPreis4850Liter());
@@ -110,6 +115,14 @@ public class AnfragenController {
         }
         return neueUnternehmensliste;
     }
+
+    public List<EntityInterface> sortiereAbsteigend(JpaRepository repository){
+        List<EntityInterface> liste = repository.findAll();
+        Collections.sort(liste,Collections.reverseOrder());
+        return liste;
+    }
+
+
 }
 
 

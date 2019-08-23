@@ -123,6 +123,17 @@ public class Fluessiggas123Entity implements EntityInterface {
         result = 31 * result + (unternehmenId != null ? unternehmenId.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public int compareTo(EntityInterface o) {
+        if(this.getId()<o.getId()){
+            return -1;
+        } else if (this.getId()==o.getId()){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 }
 
 

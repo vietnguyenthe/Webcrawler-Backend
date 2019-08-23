@@ -3,7 +3,7 @@ package de.awa.training.webcrawler.entity;
 
 import java.sql.Date;
 
-public interface EntityInterface {
+public interface EntityInterface extends Comparable<EntityInterface> {
 
     public Integer getId();
 
@@ -43,13 +43,6 @@ public interface EntityInterface {
 
 
     public int hashCode();
-
-
-
-
-
-
-
 
 
 
