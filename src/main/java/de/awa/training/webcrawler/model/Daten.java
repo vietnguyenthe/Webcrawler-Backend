@@ -2,6 +2,7 @@ package de.awa.training.webcrawler.model;
 
 public class Daten {
 
+    private String id;
     private String name;
     private String adresse;
     private String plz;
@@ -10,12 +11,19 @@ public class Daten {
 
     public Daten(){}
 
-    public Daten(String name, String adresse, String plz, String ort, String preis) {
+
+
+    public Daten(String id, String name, String adresse, String plz, String ort, String preis) {
+        this.id = id;
         this.name = name;
         this.adresse = adresse;
         this.plz = plz;
         this.ort = ort;
         this.preis = preis;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -56,5 +64,17 @@ public class Daten {
 
     public void setPreis(String preis) {
         this.preis = preis;
+    }
+
+    @Override
+    public String toString() {
+        return "Daten{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", plz='" + plz + '\'' +
+                ", ort='" + ort + '\'' +
+                ", preis='" + preis + '\'' +
+                '}';
     }
 }
