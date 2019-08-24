@@ -1,8 +1,11 @@
 package de.awa.training.webcrawler;
 
+import de.awa.training.webcrawler.entity.EntityInterface;
+import de.awa.training.webcrawler.entity.PfiffiggasEntity;
 import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
 import de.awa.training.webcrawler.entity.UnternehmenEntity;
 import de.awa.training.webcrawler.repository.PLZRepository;
+import de.awa.training.webcrawler.repository.PfiffiggasRepository;
 import de.awa.training.webcrawler.repository.UnternehemensRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +15,8 @@ import de.awa.training.webcrawler.services.MeinFluessiggasWebcrawler;
 import de.awa.training.webcrawler.services.PfiffiggasWebcrawler;
 
 import java.text.ParseException;
+import java.util.List;
+
 import org.openqa.selenium.NoSuchElementException;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +24,8 @@ import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 public class DemoApplication {
+    @Autowired
+    PfiffiggasRepository pfiffiggasRepository;
 
     @Autowired
     PfiffiggasWebcrawler pfiffiggasWebcrawler;
@@ -74,8 +81,15 @@ public class DemoApplication {
             meinFluessiggasWebcrawler.allePLZCrawlen();
             fluessiggas123.allePLZCrawlen();
 
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
+
+
+
+
     }
 }

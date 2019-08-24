@@ -10,6 +10,7 @@ public class PostleitzahlenEntity {
 
     @Id
     @GeneratedValue
+    @Column(name = "ID_PLZ")
     private Integer id;
     private String plz;
 
@@ -17,7 +18,7 @@ public class PostleitzahlenEntity {
     @OneToMany(mappedBy = "pfiffiggas")
     private List<PfiffiggasEntity> entity = new ArrayList<>();
     */
-    @Column(name = "ID")
+
     public Integer getId() {
         return id;
     }
