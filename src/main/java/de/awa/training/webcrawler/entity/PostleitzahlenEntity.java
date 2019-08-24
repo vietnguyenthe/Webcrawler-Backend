@@ -19,6 +19,13 @@ public class PostleitzahlenEntity {
     private List<PfiffiggasEntity> entity = new ArrayList<>();
     */
 
+    public PostleitzahlenEntity(){}
+
+    public PostleitzahlenEntity(Integer id, String plz) {
+        this.id = id;
+        this.plz = plz;
+    }
+
     public Integer getId() {
         return id;
     }
