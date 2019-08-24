@@ -63,9 +63,7 @@ public class AnfragenService {
 
     public String holePreisausEntitytabelle(JpaRepository repository, Integer plzID, Integer tankgröße){
         List<EntityInterface> sortierteListe = sortiereAbsteigend(repository);
-
         List<String> leereListe = new ArrayList<>();
-
         for (EntityInterface entity:sortierteListe){
             if(entity.getPostleitzahlenId().equals(plzID)){
                 leereListe.add(entity.getPreis2700Liter());

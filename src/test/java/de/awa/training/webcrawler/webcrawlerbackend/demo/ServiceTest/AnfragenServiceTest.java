@@ -49,7 +49,16 @@ public class AnfragenServiceTest {
         Assert.assertNull(null,id3);
     }
 
-
+    @Test
+    public void tankgrößeInIndexumwandelnTEST(){
+        MockitoAnnotations.initMocks(this);
+        Integer kleinerTank=anfragenService.tankgrößeInIndexumwandeln("preis2700liter");
+        Integer mittlererTank=anfragenService.tankgrößeInIndexumwandeln("preis4850liter");
+        Integer tankIDnichtvorhanden=anfragenService.tankgrößeInIndexumwandeln("test");
+        Assert.assertEquals(Integer.valueOf(0),kleinerTank);
+        Assert.assertEquals(Integer.valueOf(1),mittlererTank);
+        Assert.assertNull(tankIDnichtvorhanden);
+    }
 
 
 
