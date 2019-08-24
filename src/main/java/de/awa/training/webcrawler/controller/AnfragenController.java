@@ -27,8 +27,9 @@ public class AnfragenController {
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/preis/anfrage")
     public List<Daten> anfrageerhalten(@RequestBody Anfrage test){
+        String behaelter = anfragenService.prüfeTankdatenaufNULL(test.getBehaelter());
         Integer plzID = anfragenService.holePLZid(test.getPlz());
-        Integer tankgröße = anfragenService.tankgrößeInIndexumwandeln(test.getBehaelter());
+        Integer tankgröße = anfragenService.tankgrößeInIndexumwandeln(behaelter);
         ArrayList<PreisDaten>preisliste = anfragenService.sammlePreise(plzID,tankgröße);
         List<Daten> liste = anfragenService.preisUnternehmenZuweisen(preisliste);
         return liste;

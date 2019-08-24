@@ -74,7 +74,7 @@ public class AnfragenService {
                 return leereListe.get(tankgröße);
             }
         }
-        return "Kein Wert für die gefunden";
+        return "Kein Wert für die PLZ gefunden";
     }
 
     public ArrayList<PreisDaten>sammlePreise(Integer plzID, Integer tankgröße){
@@ -114,5 +114,11 @@ public class AnfragenService {
         return liste;
     }
 
-
+    public String prüfeTankdatenaufNULL(String tankdaten){
+        if(tankdaten==null){
+            return "Bitte Tankdaten eingeben";
+        }else{
+            return tankdaten;
+        }
+    }
 }
