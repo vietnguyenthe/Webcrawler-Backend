@@ -73,9 +73,7 @@ public class DemoApplication {
             pfiffiggasWebcrawler.allePLZCrawlen();
             meinFluessiggasWebcrawler.allePLZCrawlen();
             fluessiggas123.allePLZCrawlen();
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-            System.out.println("Fehler! Crawler nicht erfolgreich");
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

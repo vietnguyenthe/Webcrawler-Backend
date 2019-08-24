@@ -53,8 +53,8 @@ public abstract class Crawler{
     public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException;
 
     public void allePLZCrawlen() throws ParseException,NoSuchElementException {
-        /*start(15, 24, 0, "51570");
-        start(15, 25, 0, "52152");
+        start(9, 0, 0, "51570");
+        /*start(9, 25, 0, "52152");
         start(15, 26, 0, "53804");
         start(15, 27, 0, "54290");
         start(15, 28, 0, "55543");
