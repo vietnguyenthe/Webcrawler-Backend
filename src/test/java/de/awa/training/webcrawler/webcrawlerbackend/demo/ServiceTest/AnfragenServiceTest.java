@@ -161,8 +161,7 @@ public class AnfragenServiceTest {
 
     @Test
     public void prüfeTankdatenaufNULLTEST(){
-        String tank = "";
-        Assert.assertEquals("Bitte Tankdaten eingeben",anfragenService.prüfeTankdatenaufNULL(tank));
+
     }
 
 

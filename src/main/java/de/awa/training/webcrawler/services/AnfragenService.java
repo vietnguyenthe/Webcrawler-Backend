@@ -112,11 +112,4 @@ public class AnfragenService {
         return liste;
     }
 
-    public String prüfeTankdatenaufNULL(String tankdaten){
-        if(tankdaten.equals("")){
-            return "Bitte Tankdaten eingeben";
-        }else{
-            return tankdaten;
-        }
-    }
 }
