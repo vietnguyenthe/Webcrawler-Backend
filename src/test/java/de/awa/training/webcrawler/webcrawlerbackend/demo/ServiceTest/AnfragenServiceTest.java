@@ -159,10 +159,4 @@ public class AnfragenServiceTest {
       Assert.assertEquals(sortierteListe.get(0).getPreis6400Liter(),"37");
     }
 
-    @Test
-    public void prüfeTankdatenaufNULLTEST(){
-
-    }
-
-
 }
