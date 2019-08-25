@@ -18,6 +18,20 @@ public class MeinfluessiggasEntity implements EntityInterface{
     private Integer postleitzahlenId;
     private Integer unternehmenId;
 
+    public  MeinfluessiggasEntity(){}
+
+    public MeinfluessiggasEntity(Integer id, String preis2700Liter, String preis4850Liter, String preis6400Liter, Integer postleitzahlenId, Integer unternehmenId) {
+        this.id = id;
+        this.preis2700Liter = preis2700Liter;
+        this.preis4850Liter = preis4850Liter;
+        this.preis6400Liter = preis6400Liter;
+        this.postleitzahlenId = postleitzahlenId;
+        this.unternehmenId = unternehmenId;
+    }
+
+
+
+
     @Column(name = "ID")
     public Integer getId() {
         return id;
