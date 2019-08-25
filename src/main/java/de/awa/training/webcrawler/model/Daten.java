@@ -13,13 +13,13 @@ public class Daten {
 
 
 
-    public Daten(String id, String name, String adresse, String plz, String ort, String preis) {
+    public Daten(String id, String name, String adresse, String plz, String ort) {
         this.id = id;
         this.name = name;
         this.adresse = adresse;
         this.plz = plz;
         this.ort = ort;
-        this.preis = preis;
+        //this.preis = preis;
     }
 
     public String getId() {

@@ -14,6 +14,15 @@ public class UnternehmenEntity {
     private String plz;
     private String ort;
 
+    public UnternehmenEntity(){ }
+
+    public UnternehmenEntity(Integer id, String name, String adresse, String plz, String ort) {
+        this.id = id;
+        this.name = name;
+        this.adresse = adresse;
+        this.plz = plz;
+        this.ort = ort;
+    }
 
     @Column(name = "ID")
     public Integer getId() {
@@ -88,5 +97,16 @@ public class UnternehmenEntity {
         result = 31 * result + (plz != null ? plz.hashCode() : 0);
         result = 31 * result + (ort != null ? ort.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "UnternehmenEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", plz='" + plz + '\'' +
+                ", ort='" + ort + '\'' +
+                '}';
     }
 }

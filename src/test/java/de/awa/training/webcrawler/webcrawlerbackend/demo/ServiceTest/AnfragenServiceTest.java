@@ -1,9 +1,7 @@
 package de.awa.training.webcrawler.webcrawlerbackend.demo.ServiceTest;
 
-import de.awa.training.webcrawler.entity.Fluessiggas123Entity;
-import de.awa.training.webcrawler.entity.MeinfluessiggasEntity;
-import de.awa.training.webcrawler.entity.PfiffiggasEntity;
-import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
+import de.awa.training.webcrawler.entity.*;
+import de.awa.training.webcrawler.model.Daten;
 import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.repository.*;
 import de.awa.training.webcrawler.services.AnfragenService;
@@ -39,6 +37,7 @@ public class AnfragenServiceTest {
     @InjectMocks
     AnfragenService anfragenService;
 
+    ArrayList<UnternehmenEntity> gemockteUternehmen = new ArrayList<>();
     ArrayList<PfiffiggasEntity> pfiffiggemockteListe = new ArrayList<>();
     ArrayList<MeinfluessiggasEntity> meinFluessiggasgemockteListe = new ArrayList<>();
     ArrayList<Fluessiggas123Entity> fluessiggas123gemockteListe = new ArrayList<>();
@@ -46,6 +45,11 @@ public class AnfragenServiceTest {
 
     @Before
     public void testDatenVorbereiten(){
+
+        gemockteUternehmen.add(new UnternehmenEntity(1,"Propan Rheingas GmbH & Co. KG","Fischenicher Straße 23","50321","Brühl"));
+        gemockteUternehmen.add(new UnternehmenEntity(2,"DFG Deutsche Flüssiggas GmbH","Stau 169","262122","Oldenburg"));
+        gemockteUternehmen.add(new UnternehmenEntity(3,"TEGA - Technische Gase und Gasetechnik GmbH", "Blumenstraße 70","99092", "Erfurt"));
+
         pfiffiggemockteListe.add(new PfiffiggasEntity(1,"29","30","31",1,1));
         pfiffiggemockteListe.add(new PfiffiggasEntity(2,"32","33","34",1,1));
         pfiffiggemockteListe.add(new PfiffiggasEntity(3,"35","36","37",1,1));
@@ -113,6 +117,52 @@ public class AnfragenServiceTest {
         Assert.assertEquals(erwarteteListe.get(0).toString(),new PreisDaten(3,"56").toString());
         Assert.assertEquals(erwarteteListe.get(1).toString(),new PreisDaten(2,"46").toString());
         Assert.assertEquals(erwarteteListe.get(2).toString(),new PreisDaten(1,"36").toString());
+    }
+
+    @Test
+    public void unternehmensDatenGenerierenTEST(){
+        MockitoAnnotations.initMocks(this);
+        Mockito.when(unternehemensRepository.findAll()).thenReturn(gemockteUternehmen);
+        ArrayList<Daten> unternehemensListemitPreis = anfragenService.unternehmensDatenGenerieren();
+        Daten daten = new Daten("1","Propan Rheingas GmbH & Co. KG","Fischenicher Straße 23","50321","Brühl");
+        Daten daten1 = new Daten("3","TEGA - Technische Gase und Gasetechnik GmbH", "Blumenstraße 70","99092", "Erfurt");
+        Assert.assertEquals(unternehemensListemitPreis.get(0).toString(),daten.toString());
+        Assert.assertEquals(unternehemensListemitPreis.get(2).toString(),daten1.toString());
+
+    }
+
+    @Test
+    public void preisUnternehmenZuweisenTEST(){
+        MockitoAnnotations.initMocks(this);
+        Mockito.when(unternehemensRepository.findAll()).thenReturn(gemockteUternehmen);
+        Mockito.when(pfiffiggasRepository.findAll()).thenReturn(pfiffiggemockteListe);
+        Mockito.when(meinFluessiggasRepository.findAll()).thenReturn(meinFluessiggasgemockteListe);
+        Mockito.when(fluessiggas123Repository.findAll()).thenReturn(fluessiggas123gemockteListe);
+        ArrayList<Daten> testListe = anfragenService.preisUnternehmenZuweisen(anfragenService.sammlePreise(1,1));
+        ArrayList<Daten> testListe2 = anfragenService.preisUnternehmenZuweisen(anfragenService.sammlePreise(1,0));
+        Daten daten = new Daten();
+        daten.setPreis("36");
+        Assert.assertEquals(daten.getPreis(),testListe.get(0).getPreis());
+        daten.setPreis("45");
+        Assert.assertEquals(daten.getPreis(),testListe2.get(1).getPreis());
+
+    }
+
+
+    @Test
+    public void sortiereListeTEST(){
+      MockitoAnnotations.initMocks(this);
+      Mockito.when(pfiffiggasRepository.findAll()).thenReturn(pfiffiggemockteListe);
+      List<EntityInterface> sortierteListe = anfragenService.sortiereAbsteigend(pfiffiggasRepository);
+      Assert.assertEquals(sortierteListe.get(0).getId(),Integer.valueOf(3));
+      Assert.assertEquals(sortierteListe.get(2).getId(),Integer.valueOf(1));
+      Assert.assertEquals(sortierteListe.get(0).getPreis6400Liter(),"37");
+    }
+
+    @Test
+    public void prüfeTankdatenaufNULLTEST(){
+        String tank = "";
+        Assert.assertEquals("Bitte Tankdaten eingeben",anfragenService.prüfeTankdatenaufNULL(tank));
     }
 
 

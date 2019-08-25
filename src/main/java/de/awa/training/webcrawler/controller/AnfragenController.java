@@ -35,7 +35,6 @@ public class AnfragenController {
         return liste;
     }
 
-
 }
 
 

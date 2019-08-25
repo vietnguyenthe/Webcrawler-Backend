@@ -88,7 +88,7 @@ public class AnfragenService {
         List<UnternehmenEntity> listeUnternehmen = unternehemensRepository.findAll();
         ArrayList<Daten> liste = new ArrayList<>();
         for (UnternehmenEntity entity : unternehemensRepository.findAll()) {
-            liste.add(new Daten(String.valueOf(entity.getId()),entity.getName(), entity.getAdresse(), entity.getPlz(), entity.getOrt(), "30,00"));
+            liste.add(new Daten(String.valueOf(entity.getId()),entity.getName(), entity.getAdresse(), entity.getPlz(), entity.getOrt()));
         }
         return liste;
     }
@@ -113,7 +113,7 @@ public class AnfragenService {
     }
 
     public String prüfeTankdatenaufNULL(String tankdaten){
-        if(tankdaten==null){
+        if(tankdaten.equals("")){
             return "Bitte Tankdaten eingeben";
         }else{
             return tankdaten;
