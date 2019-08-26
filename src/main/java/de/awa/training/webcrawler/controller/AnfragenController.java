@@ -41,8 +41,10 @@ public class AnfragenController {
     }
 
     // Unternehmensanfrage aus dem Frontend entgegennehmen und in der Datenbank speichern
+    @CrossOrigin("http://localhost:3000")
     @PostMapping("/kontaktUnternehmen")
-    public void unternehmensAnfrage (@RequestBody KontaktAnfrage kontaktAnfrage){
+    public String unternehmensAnfrage (@RequestBody KontaktAnfrage kontaktAnfrage){
+
 
         // Entity Kontaktanfrage erstellen und dann die erhaltenen Daten mit dem Setter und getter festlegen + speichern
         KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
@@ -55,11 +57,10 @@ public class AnfragenController {
         kontaktanfrageEntity.setKontaktperson(kontaktAnfrage.getKontaktperson());
         kontaktanfrageEntity.setEmailAdresse(kontaktAnfrage.getEmailAdresse());
         kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());
-
         kontaktanfrageRepository.save(kontaktanfrageEntity);
+        return "Kontaktanfrage erfolgreich";
+
 }
-
-
 
 }
 
