@@ -10,6 +10,7 @@ import de.awa.training.webcrawler.model.KontaktAnfrage;
 import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.repository.*;
 import de.awa.training.webcrawler.services.AnfragenService;
+import de.awa.training.webcrawler.services.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -31,9 +32,12 @@ public class AnfragenController {
 
     @Autowired
     KontaktanfrageRepository kontaktanfrageRepository;
+/*
+    @Autowired
+    private JavaMailSender sender;*/
 
     @Autowired
-    private JavaMailSender sender;
+    private MailService mailService;
 
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/preis/anfrage")
@@ -66,21 +70,10 @@ public class AnfragenController {
         kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());
 
         kontaktanfrageRepository.save(kontaktanfrageEntity);
+
         // Email an das Flüssiggas Team senden mit den nötigen Informationen
-        try {
-            MimeMessage message = sender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message);
+        mailService.mailSendenKontaktanfrage(kontaktAnfrage);
 
-            helper.setTo("TeamFluessiggas@Crawler.com");
-            helper.setText(kontaktAnfrage.getNachricht());
-            helper.setSubject(kontaktAnfrage.getBetreff());
-            helper.setFrom(kontaktAnfrage.getEmailAdresse());
-
-            sender.send(message);
-
-        }catch(Exception ex) {
-            System.out.println("Error in sending email: "+ex);
-        }
  }
 
 }
@@ -93,3 +86,20 @@ public class AnfragenController {
         /*liste.add(new Daten("Un","Un","Un","Un","30,00"));
         liste.add(new Daten("AD","AD","AD","AD","32,00"));
         liste.add(new Daten("AD","AD","AD","AD","34,00"));*/
+
+
+/*
+                try {
+                        MimeMessage message = sender.createMimeMessage();
+                        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+                        helper.setTo("TeamFluessiggas@Crawler.com");
+                        helper.setText(kontaktAnfrage.getNachricht());
+                        helper.setSubject(kontaktAnfrage.getBetreff());
+                        helper.setFrom(kontaktAnfrage.getEmailAdresse());
+
+                        sender.send(message);
+
+                        }catch(Exception ex) {
+                        System.out.println("Error in sending email: "+ex);
+                        }*/
