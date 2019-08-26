@@ -1,3 +1,4 @@
+/*
 package de.awa.training.webcrawler.EmailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,3 +24,4 @@ public class EmailService  {
 
 
 }
+*/

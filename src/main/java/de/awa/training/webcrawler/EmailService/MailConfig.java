@@ -1,3 +1,4 @@
+/*
 package de.awa.training.webcrawler.EmailService;
 
 
@@ -33,4 +34,5 @@ public class MailConfig {
         }
 
     }
+*/
 
