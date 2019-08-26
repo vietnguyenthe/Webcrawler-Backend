@@ -51,6 +51,7 @@ public class AnfragenController {
         kontaktanfrageEntity.setFirmennamen(kontaktAnfrage.getFirmennamen());
         kontaktanfrageEntity.setFirmenadresse(kontaktAnfrage.getFirmenadresse());
         kontaktanfrageEntity.setPlz(kontaktAnfrage.getPlz());
+        kontaktanfrageEntity.setOrt(kontaktAnfrage.getOrt());
         kontaktanfrageEntity.setKontaktperson(kontaktAnfrage.getKontaktperson());
         kontaktanfrageEntity.setEmailAdresse(kontaktAnfrage.getEmailAdresse());
         kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());

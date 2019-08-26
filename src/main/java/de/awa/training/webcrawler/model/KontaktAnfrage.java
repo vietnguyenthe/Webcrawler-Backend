@@ -5,11 +5,20 @@ public class KontaktAnfrage {
 
     private String firmennamen;
     private String firmenadresse;
+    private String ort;
     private String plz;
     private String kontaktperson;
     private String emailAdresse;
     private String nachricht;
     private String betreff;
+
+    public String getOrt() {
+        return ort;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
 
     public String getFirmennamen() {
         return firmennamen;
