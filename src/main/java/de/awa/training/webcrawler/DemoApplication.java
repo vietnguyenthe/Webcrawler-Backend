@@ -50,9 +50,11 @@ public class DemoApplication {
     private void init() {
         String[]postleitzahlen = {"51570","52152","53804", "54290","55543","56072","57539","58119"};
         String [][]unternehmen = {
-                {"Propan Rheingas GmbH & Co. KG","Fischenicher Straße 23","50321","Brühl"},
-                {"DFG Deutsche Flüssiggas GmbH","Stau 169","262122","Oldenburg"},
-                {"TEGA - Technische Gase und Gasetechnik GmbH", "Blumenstraße 70","99092", "Erfurt"}
+                {"Propan Rheingas GmbH & Co. KG","Fischenicher Straße 23","50321","Brühl","pfiffiggas","pfiffiggas"},
+                {"DFG Deutsche Flüssiggas GmbH","Stau 169","262122","Oldenburg","meinfluessiggas","meinfluessiggas"},
+                {"TEGA - Technische Gase und Gasetechnik GmbH", "Blumenstraße 70","99092 ","Erfurt","fluessiggas123", "fluessiggas123"},
+                {"Beispielunternehmen", "ABC str.90","50000", "Köln","bespiel","beispiel"},
+                {"Testunternehmen", "DEF str.100","60000", "Köln","test","test"},
         };
 
 
@@ -72,6 +74,8 @@ public class DemoApplication {
                     entity.setAdresse(einezelnesUnternehmen[1]);
                     entity.setPlz(einezelnesUnternehmen[2]);
                     entity.setOrt(einezelnesUnternehmen[3]);
+                    entity.setBenutzername(einezelnesUnternehmen[4]);
+                    entity.setPasswort(einezelnesUnternehmen[5].hashCode());
                     unternehemensRepository.save(entity);
                     i++;
                 }

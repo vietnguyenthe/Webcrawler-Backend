@@ -14,6 +14,12 @@ public class UnternehmenEntity {
     private String plz;
     private String ort;
 
+
+    private String benutzername;
+    private Integer passwort;
+
+
+
     public UnternehmenEntity(){ }
 
     public UnternehmenEntity(Integer id, String name, String adresse, String plz, String ort) {
@@ -73,6 +79,32 @@ public class UnternehmenEntity {
         this.ort = ort;
     }
 
+
+    @Basic
+    @Column(name = "Benutzername")
+    public String getBenutzername() {
+        return benutzername;
+    }
+
+    public void setBenutzername(String benutzername) {
+        this.benutzername = benutzername;
+    }
+
+    @Basic
+    @Column(name = "Passwort")
+    public Integer getPasswort() {
+        return passwort;
+    }
+
+    public void setPasswort(int passwort) {
+        this.passwort = passwort;
+    }
+
+
+
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,6 +117,8 @@ public class UnternehmenEntity {
         if (adresse != null ? !adresse.equals(that.adresse) : that.adresse != null) return false;
         if (plz != null ? !plz.equals(that.plz) : that.plz != null) return false;
         if (ort != null ? !ort.equals(that.ort) : that.ort != null) return false;
+        if (benutzername != null ? !benutzername.equals(that.benutzername) : that.benutzername != null) return false;
+        if (passwort != null ? !passwort.equals(that.passwort) : that.passwort != null) return false;
 
         return true;
     }
@@ -96,6 +130,8 @@ public class UnternehmenEntity {
         result = 31 * result + (adresse != null ? adresse.hashCode() : 0);
         result = 31 * result + (plz != null ? plz.hashCode() : 0);
         result = 31 * result + (ort != null ? ort.hashCode() : 0);
+        result = 31 * result + (benutzername != null ? benutzername.hashCode() : 0);
+        result = 31 * result + (passwort != null ? passwort.hashCode() : 0);
         return result;
     }
 
