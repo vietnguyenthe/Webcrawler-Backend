@@ -1,10 +1,12 @@
 package de.awa.training.webcrawler.controller;
 
 import de.awa.training.webcrawler.entity.EntityInterface;
+import de.awa.training.webcrawler.entity.KontaktanfrageEntity;
 import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
 import de.awa.training.webcrawler.entity.UnternehmenEntity;
 import de.awa.training.webcrawler.model.Daten;
 import de.awa.training.webcrawler.model.Anfrage;
+import de.awa.training.webcrawler.model.KontaktAnfrage;
 import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.repository.*;
 import de.awa.training.webcrawler.services.AnfragenService;
@@ -24,6 +26,9 @@ public class AnfragenController {
     @Autowired
     AnfragenService anfragenService;
 
+    @Autowired
+    KontaktanfrageRepository kontaktanfrageRepository;
+
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/preis/anfrage")
     public List<Daten> anfrageerhalten(@RequestBody Anfrage test){
@@ -34,6 +39,26 @@ public class AnfragenController {
         List<Daten> liste = anfragenService.preisUnternehmenZuweisen(preisliste);
         return liste;
     }
+
+    @PostMapping("/kontaktUnternehmen")
+    public void unternehmensAnfrage (@RequestBody KontaktanfrageEntity kontaktAnfrage){
+        System.out.println(kontaktAnfrage.getEmailAdresse());
+        System.out.println(kontaktAnfrage.getBetreff());
+        System.out.println(kontaktAnfrage.getKontaktperson());
+
+/*        KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
+        kontaktanfrageEntity.setBetreff(kontaktAnfrage.getBetreff());
+        kontaktanfrageEntity.setFirmennamen(kontaktAnfrage.getFirmennamen());
+        kontaktanfrageEntity.setFirmenadresse(kontaktAnfrage.getFirmenadresse());
+        kontaktanfrageEntity.setPlz(kontaktAnfrage.getPlz());
+        kontaktanfrageEntity.setKontaktperson(kontaktAnfrage.getKontaktperson());
+        kontaktanfrageEntity.setEmailAdresse(kontaktAnfrage.getEmailAdresse());
+        kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());*/
+
+        kontaktanfrageRepository.save(kontaktAnfrage);
+}
+
+
 
 }
 
