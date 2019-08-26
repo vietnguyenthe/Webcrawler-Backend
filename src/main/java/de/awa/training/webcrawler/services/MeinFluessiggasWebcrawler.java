@@ -56,6 +56,7 @@ public class MeinFluessiggasWebcrawler extends Crawler {
         }catch (NoSuchElementException e) {
             //e.printStackTrace();
             System.out.println("Crawler bei MeinFlüssiggas nicht erfolgreich für " + plz);
+
     }finally {
             driver.quit();
         }

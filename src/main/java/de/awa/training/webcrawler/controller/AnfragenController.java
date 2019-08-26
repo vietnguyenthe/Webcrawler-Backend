@@ -49,6 +49,7 @@ public class AnfragenController {
 
     // Unternehmensanfrage aus dem Frontend entgegennehmen und in der Datenbank speichern
     // Zusätzlich eine Benachrichtigungsmail ans Team schicken mit den nötigen Informationen
+    @CrossOrigin("http://localhost:3000")
     @PostMapping("/kontaktUnternehmen")
     public void unternehmensAnfrage (@RequestBody KontaktAnfrage kontaktAnfrage){
         // Entity Kontaktanfrage erstellen und dann die erhaltenen Daten mit dem Setter und getter festlegen + speichern
@@ -65,7 +66,6 @@ public class AnfragenController {
         kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());
 
         kontaktanfrageRepository.save(kontaktanfrageEntity);
-
         // Email an das Flüssiggas Team senden mit den nötigen Informationen
         try {
             MimeMessage message = sender.createMimeMessage();
@@ -81,11 +81,7 @@ public class AnfragenController {
         }catch(Exception ex) {
             System.out.println("Error in sending email: "+ex);
         }
-
-
-}
-
-
+ }
 
 }
 
