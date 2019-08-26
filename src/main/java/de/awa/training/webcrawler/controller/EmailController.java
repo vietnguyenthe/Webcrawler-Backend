@@ -1,5 +1,7 @@
+/*
 package de.awa.training.webcrawler.controller;
 
+import de.awa.training.webcrawler.repository.KontaktanfrageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -14,6 +16,10 @@ public class EmailController {
 
     @Autowired
     private JavaMailSender sender;
+
+    @Autowired
+    private KontaktanfrageRepository kontaktanfrageRepository;
+
 
     @RequestMapping("/simpleemail")
     @ResponseBody
@@ -30,10 +36,12 @@ public class EmailController {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setTo("kazim.guevenc@gmail.com");
+        helper.setTo("k.coep@gmx.de");
         helper.setText("How are you?");
         helper.setSubject("Hi");
+        helper.setFrom(kontaktanfrageRepository);
 
         sender.send(message);
     }
 }
+*/

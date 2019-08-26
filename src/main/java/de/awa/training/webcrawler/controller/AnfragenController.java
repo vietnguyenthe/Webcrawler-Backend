@@ -12,8 +12,11 @@ import de.awa.training.webcrawler.repository.*;
 import de.awa.training.webcrawler.services.AnfragenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.internet.MimeMessage;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +32,9 @@ public class AnfragenController {
     @Autowired
     KontaktanfrageRepository kontaktanfrageRepository;
 
+    @Autowired
+    private JavaMailSender sender;
+
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/preis/anfrage")
     public List<Daten> anfrageerhalten(@RequestBody Anfrage test){
@@ -40,10 +46,11 @@ public class AnfragenController {
         return liste;
     }
 
+
     // Unternehmensanfrage aus dem Frontend entgegennehmen und in der Datenbank speichern
+    // Zusätzlich eine Benachrichtigungsmail ans Team schicken mit den nötigen Informationen
     @PostMapping("/kontaktUnternehmen")
     public void unternehmensAnfrage (@RequestBody KontaktAnfrage kontaktAnfrage){
-
         // Entity Kontaktanfrage erstellen und dann die erhaltenen Daten mit dem Setter und getter festlegen + speichern
         KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
 
@@ -57,6 +64,24 @@ public class AnfragenController {
         kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());
 
         kontaktanfrageRepository.save(kontaktanfrageEntity);
+
+        // Email an das Flüssiggas Team senden mit den nötigen Informationen
+        try {
+            MimeMessage message = sender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setTo("TeamFluessiggas@Crawler.com");
+            helper.setText(kontaktAnfrage.getNachricht());
+            helper.setSubject(kontaktAnfrage.getBetreff());
+            helper.setFrom(kontaktAnfrage.getEmailAdresse());
+
+            sender.send(message);
+
+        }catch(Exception ex) {
+            System.out.println("Error in sending email: "+ex);
+        }
+
+
 }
 
 
