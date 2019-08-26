@@ -40,22 +40,22 @@ public class AnfragenController {
         return liste;
     }
 
+    // Unternehmensanfrage aus dem Frontend entgegennehmen und in der Datenbank speichern
     @PostMapping("/kontaktUnternehmen")
-    public void unternehmensAnfrage (@RequestBody KontaktanfrageEntity kontaktAnfrage){
-        System.out.println(kontaktAnfrage.getEmailAdresse());
-        System.out.println(kontaktAnfrage.getBetreff());
-        System.out.println(kontaktAnfrage.getKontaktperson());
+    public void unternehmensAnfrage (@RequestBody KontaktAnfrage kontaktAnfrage){
 
-/*        KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
+        // Entity Kontaktanfrage erstellen und dann die erhaltenen Daten mit dem Setter und getter festlegen + speichern
+        KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
+
         kontaktanfrageEntity.setBetreff(kontaktAnfrage.getBetreff());
         kontaktanfrageEntity.setFirmennamen(kontaktAnfrage.getFirmennamen());
         kontaktanfrageEntity.setFirmenadresse(kontaktAnfrage.getFirmenadresse());
         kontaktanfrageEntity.setPlz(kontaktAnfrage.getPlz());
         kontaktanfrageEntity.setKontaktperson(kontaktAnfrage.getKontaktperson());
         kontaktanfrageEntity.setEmailAdresse(kontaktAnfrage.getEmailAdresse());
-        kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());*/
+        kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());
 
-        kontaktanfrageRepository.save(kontaktAnfrage);
+        kontaktanfrageRepository.save(kontaktanfrageEntity);
 }
 
 
