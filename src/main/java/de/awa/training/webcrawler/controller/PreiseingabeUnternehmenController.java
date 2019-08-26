@@ -1,37 +1,47 @@
 package de.awa.training.webcrawler.controller;
 
 import de.awa.training.webcrawler.entity.PreiseingabeUnternehmenEntity;
+import de.awa.training.webcrawler.entity.UnternehmenEntity;
 import de.awa.training.webcrawler.model.PreiseingabeUnternehmen;
 import de.awa.training.webcrawler.repository.PreiseingabeUnternehmenRepository;
+import de.awa.training.webcrawler.repository.UnternehemensRepository;
+import net.bytebuddy.asm.Advice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.persistence.GeneratedValue;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class PreiseingabeUnternehmenController {
 
-    // Unternehmensanfrage aus dem Frontend entgegennehmen und in der Datenbank speichern
-    @PostMapping("/kontaktUnternehmen")
-    public void unternehmensAnfrage (@RequestBody KontaktAnfrage kontaktAnfrage){
+    @Autowired
+    PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
-        // Entity Kontaktanfrage erstellen und dann die erhaltenen Daten mit dem Setter und getter festlegen + speichern
-        KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
-
-        kontaktanfrageEntity.setBetreff(kontaktAnfrage.getBetreff());
-        kontaktanfrageEntity.setFirmennamen(kontaktAnfrage.getFirmennamen());
-        kontaktanfrageEntity.setFirmenadresse(kontaktAnfrage.getFirmenadresse());
-        kontaktanfrageEntity.setOrt(kontaktAnfrage.getOrt());
-        kontaktanfrageEntity.setPlz(kontaktAnfrage.getPlz());
-        kontaktanfrageEntity.setKontaktperson(kontaktAnfrage.getKontaktperson());
-        kontaktanfrageEntity.setEmailAdresse(kontaktAnfrage.getEmailAdresse());
-        kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());
-
-        kontaktanfrageRepository.save(kontaktanfrageEntity);
-    }
+    @Autowired
+    UnternehemensRepository unternehemensRepository;
 
     @PostMapping("/preiseingabe")
-    public void preiseingabe(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen){
+    public void preiseingabe(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen) {
 
         PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
+        UnternehmenEntity unternehmenEntity = new UnternehmenEntity();
 
-        PreiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
+        preiseingabeUnternehmenEntity.setPreis2700Liter(preiseingabeUnternehmen.getPreis2700Liter());
+        preiseingabeUnternehmenEntity.setPreis4850Liter(preiseingabeUnternehmen.getPreis4850Liter());
+        preiseingabeUnternehmenEntity.setPreis6400Liter(preiseingabeUnternehmen.getPreis6400Liter());
+        preiseingabeUnternehmenEntity.setDatum(new Date(new java.util.Date().getTime()));
+        preiseingabeUnternehmenEntity.setId(unternehmenEntity.getId());
+
+        unternehmenEntity.setAdresse(preiseingabeUnternehmen.getAdresse());
+        unternehmenEntity.setName(preiseingabeUnternehmen.getName());
+        unternehmenEntity.setOrt(preiseingabeUnternehmen.getOrt());
+        unternehmenEntity.setPlz(preiseingabeUnternehmen.getPlz());
+
+
+        preiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
+        unternehemensRepository.save(unternehmenEntity);
     }
 }

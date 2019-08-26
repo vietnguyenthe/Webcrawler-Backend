@@ -1,6 +1,7 @@
 package de.awa.training.webcrawler.model;
 
 public class PreiseingabeUnternehmen {
+
     private String preis2700Liter;
     private String preis4850Liter;
     private String preis6400Liter;
