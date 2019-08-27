@@ -11,10 +11,14 @@ public class LoginController {
 
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/login")
-    public void login(@RequestBody Login login){
+    public String login(@RequestBody Login login){
         System.out.println(login.getLoginName());
         System.out.println(login.getLoginPasswort());
-
+        if(login.getLoginName().equals("test")){
+            return"erfolgreich";
+        }else{
+            return"fehlgeschlagen";
+        }
     }
 
 
