@@ -55,7 +55,7 @@ public abstract class Crawler{
     public void allePLZCrawlen() throws ParseException,NoSuchElementException {
         int std = 9;
         int min = 20;
-        /*
+
         start(9, 15, 0, "51570");
         start(9, 16, 0, "52152");
         start(9, 17, 0, "53804");
@@ -63,7 +63,7 @@ public abstract class Crawler{
         start(9, 19, 0, "55543");
         start(9, 20, 0, "56072");
         start(9, 21, 0, "57539");
-        start(9, 22, 0, "58119");*/
+        start(9, 22, 0, "58119");
 
     }
 
