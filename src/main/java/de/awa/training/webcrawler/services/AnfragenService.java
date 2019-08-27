@@ -35,6 +35,11 @@ public class AnfragenService {
     @Autowired
     Fluessiggas123Repository fluessiggas123Repository;
 
+    @Autowired
+    TestRespository testRespository;
+
+    @Autowired
+    BeispielRepository beispielRepository;
 
 
     public Integer holePLZid(String plz) {
@@ -80,6 +85,8 @@ public class AnfragenService {
         preisliste.add(new PreisDaten(3,holePreisausEntitytabelle(fluessiggas123Repository,plzID,tankgröße)));
         preisliste.add(new PreisDaten(2,holePreisausEntitytabelle(meinFluessiggasRepository,plzID,tankgröße)));
         preisliste.add(new PreisDaten(1,holePreisausEntitytabelle(pfiffiggasRepository,plzID,tankgröße)));
+        preisliste.add(new PreisDaten(1,holePreisausEntitytabelle(testRespository,plzID,tankgröße)));
+        preisliste.add(new PreisDaten(1,holePreisausEntitytabelle(beispielRepository,plzID,tankgröße)));
         return preisliste;
     }
 
