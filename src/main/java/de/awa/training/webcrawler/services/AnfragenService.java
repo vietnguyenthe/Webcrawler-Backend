@@ -98,8 +98,8 @@ public class AnfragenService {
     }
 
 
-    public ArrayList<Daten> preisUnternehmenZuweisen(ArrayList<PreisDaten> preisliste){
-        ArrayList<Daten>neueUnternehmensliste = unternehmensDatenGenerieren();
+    public List<Daten> preisUnternehmenZuweisen(ArrayList<PreisDaten> preisliste){
+        List<Daten>neueUnternehmensliste = unternehmensDatenGenerieren();
         for (Daten unternehmen:neueUnternehmensliste) {
             for (PreisDaten preis:preisliste){
                 if(unternehmen.getId().equals(String.valueOf(preis.getId()))){
@@ -108,7 +108,6 @@ public class AnfragenService {
             }
         }
         // preissortierung
-        neueUnternehmensliste = sortierePreise(neueUnternehmensliste);
 
         return neueUnternehmensliste;
     }

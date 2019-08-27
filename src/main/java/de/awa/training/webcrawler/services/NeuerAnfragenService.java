@@ -44,12 +44,12 @@ public class NeuerAnfragenService {
         return null;
     }
 
-    public Integer tankgrößeInIndexumwandeln(String behaelter){
-        if(behaelter.equals("preis2700liter")){
+    public Integer tankgrößeInIndexumwandeln(String behaelter) {
+        if (behaelter.equals("preis2700liter")) {
             return 0;
-        }else if(behaelter.equals("preis4850liter")){
+        } else if (behaelter.equals("preis4850liter")) {
             return 1;
-        }else if(behaelter.equals("preis6400liter")){
+        } else if (behaelter.equals("preis6400liter")) {
             return 2;
         }
         return null;
@@ -59,32 +59,50 @@ public class NeuerAnfragenService {
         List<UnternehmenEntity> listeUnternehmen = unternehemensRepository.findAll();
         ArrayList<Daten> liste = new ArrayList<>();
         for (UnternehmenEntity entity : unternehemensRepository.findAll()) {
-            liste.add(new Daten(String.valueOf(entity.getId()),entity.getName(), entity.getAdresse(), entity.getPlz(), entity.getOrt()));
+            liste.add(new Daten(String.valueOf(entity.getId()), entity.getName(), entity.getAdresse(), entity.getPlz(), entity.getOrt()));
         }
         return liste;
     }
 
-    public List<PreisDaten> sammlePreise(Integer plz, Integer tankgröße ){
+    public List<PreisDaten> sammlePreise(Integer plz, Integer tankgröße) {
         List<PreisDaten> preisliste = new ArrayList<>();
-        List<Daten>unternehmensliste = unternehmensDatenGenerieren();
-        for(int x =1;x<=unternehmensliste.size();x++){
-            preisliste.add(new PreisDaten(x,holePreisausEntitytabelle(preiseingabeUnternehmenRepository,x,plz,tankgröße)));
+        List<Daten> unternehmensliste = unternehmensDatenGenerieren();
+        for (int x = 1; x <= unternehmensliste.size(); x++) {
+            preisliste.add(new PreisDaten(x, holePreisausEntitytabelle(preiseingabeUnternehmenRepository, plz, x, tankgröße)));
         }
-       return preisliste;
+        return preisliste;
     }
 
-    public String holePreisausEntitytabelle(JpaRepository repository, Integer id, Integer plzID, Integer tankgröße){
-        List<EntityInterface> sortierteListe = sortiereAbsteigend(repository);
+    public String holePreisausEntitytabelle(JpaRepository repository, Integer plz, Integer id, Integer tankgröße) {
+        List<EntityInterface> allePreise = sortiereAbsteigend(repository);
         List<String> leereListe = new ArrayList<>();
-            for (EntityInterface entity : sortierteListe) {
-                if (entity.getPostleitzahlenId().equals(plzID)&& id.equals(entity.getId())) {
-                    leereListe.add(entity.getPreis2700Liter());
-                    leereListe.add(entity.getPreis4850Liter());
-                    leereListe.add(entity.getPreis6400Liter());
-                    return leereListe.get(tankgröße);
+        for (EntityInterface entity : allePreise) {
+            if (entity.getPostleitzahlenId().equals(plz) && entity.getUnternehmenId().equals(id)) {
+                leereListe.add(entity.getPreis2700Liter());
+                leereListe.add(entity.getPreis4850Liter());
+                leereListe.add(entity.getPreis6400Liter());
+                return leereListe.get(tankgröße);
+            }
+        }
+        return "Kein Preis gefunden";
+    }
+
+    public List<Daten> preisUnternehmenZuweisen(List<PreisDaten> preisliste){
+        List<Daten>neueUnternehmensliste = unternehmensDatenGenerieren();
+        for (Daten unternehmen:neueUnternehmensliste) {
+            for (PreisDaten preis:preisliste){
+                if(unternehmen.getId().equals(String.valueOf(preis.getId()))){
+                    unternehmen.setPreis(preis.getPreis());
                 }
             }
-        return "Kein Wert für die PLZ gefunden";
+        }
+        neueUnternehmensliste = sortierePreise(neueUnternehmensliste);
+        return neueUnternehmensliste;
+    }
+
+    public List <Daten> sortierePreise(List <Daten> neuUnternehmensliste){
+        Collections.sort(neuUnternehmensliste);
+        return neuUnternehmensliste;
     }
 
 
@@ -94,19 +112,6 @@ public class NeuerAnfragenService {
         return liste;
     }
 
-    public List<Daten> preisUnternehmenZuweisen(List<PreisDaten> preisliste){
-        ArrayList<Daten>neueUnternehmensliste = unternehmensDatenGenerieren();
-        for (Daten unternehmen:neueUnternehmensliste) {
-            for (PreisDaten preis:preisliste){
-                if(unternehmen.getId().equals(String.valueOf(preis.getId()))){
-                    unternehmen.setPreis(preis.getPreis());
-                }
-            }
-        }
-        // preissortierung
-        return neueUnternehmensliste;
-    }
-
-
-
 }
+
+
