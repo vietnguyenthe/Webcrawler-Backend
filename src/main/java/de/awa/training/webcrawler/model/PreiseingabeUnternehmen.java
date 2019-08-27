@@ -7,8 +7,26 @@ public class PreiseingabeUnternehmen {
     private String preis6400Liter;
     private String name;
     private String adresse;
-    private String plz;
+    private String postleitzahl;
     private String ort;
+    private String kennwort;
+
+
+    public String getPostleitzahl() {
+        return postleitzahl;
+    }
+
+    public void setPostleitzahl(String postleitzahl) {
+        this.postleitzahl = postleitzahl;
+    }
+
+    public String getKennwort() {
+        return kennwort;
+    }
+
+    public void setKennwort(String kennwort) {
+        this.kennwort = kennwort;
+    }
 
     public String getPreis2700Liter() {
         return preis2700Liter;
@@ -50,13 +68,6 @@ public class PreiseingabeUnternehmen {
         this.adresse = adresse;
     }
 
-    public String getPlz() {
-        return plz;
-    }
-
-    public void setPlz(String plz) {
-        this.plz = plz;
-    }
 
     public String getOrt() {
         return ort;
