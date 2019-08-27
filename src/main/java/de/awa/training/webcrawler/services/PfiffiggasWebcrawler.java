@@ -1,8 +1,11 @@
 package de.awa.training.webcrawler.services;
 
+import de.awa.training.webcrawler.entity.BeispielEntity;
 import de.awa.training.webcrawler.entity.EntityInterface;
 import de.awa.training.webcrawler.entity.PfiffiggasEntity;
+import de.awa.training.webcrawler.entity.TestEntity;
 import de.awa.training.webcrawler.repository.PfiffiggasRepository;
+import de.awa.training.webcrawler.repository.TestRespository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +24,9 @@ public class PfiffiggasWebcrawler extends Crawler{
 
     @Autowired
     PfiffiggasRepository repository;
+
+    @Autowired
+    TestRespository testRespository;
 
     private final int UnternehmensID = 1;
 
@@ -63,7 +69,12 @@ public class PfiffiggasWebcrawler extends Crawler{
             driver.close();
 
             PfiffiggasEntity pfiffiggasEntity = new PfiffiggasEntity();
+            TestEntity testEntity = new TestEntity();
+            BeispielEntity beispielEntity = new BeispielEntity();
             preiseInDatenbankschreiben(repository,pfiffiggasEntity,preis2700,preis4850,preis6400,plz);
+            preiseInDatenbankschreiben(repository,testEntity,preis2700,preis4850,preis6400,plz);
+            preiseInDatenbankschreiben(repository,beispielEntity,preis2700,preis4850,preis6400,plz);
+
         }catch (NoSuchElementException e){
             System.out.println("Crawler bei Pfiffiggas nicht erfolgreich für " + plz);
         }finally {

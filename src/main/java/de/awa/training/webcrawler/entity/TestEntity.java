@@ -1,11 +1,9 @@
 package de.awa.training.webcrawler.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
 public class TestEntity implements EntityInterface{
     @Id
     @GeneratedValue

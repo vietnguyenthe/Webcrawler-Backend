@@ -6,15 +6,12 @@ import de.awa.training.webcrawler.entity.UnternehmenEntity;
 import de.awa.training.webcrawler.model.Daten;
 import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.repository.*;
+import org.apache.logging.log4j.util.PropertySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-
+import java.util.*;
 
 
 @Service
@@ -85,8 +82,8 @@ public class AnfragenService {
         preisliste.add(new PreisDaten(3,holePreisausEntitytabelle(fluessiggas123Repository,plzID,tankgröße)));
         preisliste.add(new PreisDaten(2,holePreisausEntitytabelle(meinFluessiggasRepository,plzID,tankgröße)));
         preisliste.add(new PreisDaten(1,holePreisausEntitytabelle(pfiffiggasRepository,plzID,tankgröße)));
-        preisliste.add(new PreisDaten(1,holePreisausEntitytabelle(testRespository,plzID,tankgröße)));
-        preisliste.add(new PreisDaten(1,holePreisausEntitytabelle(beispielRepository,plzID,tankgröße)));
+        preisliste.add(new PreisDaten(5,holePreisausEntitytabelle(testRespository,plzID,tankgröße)));
+        preisliste.add(new PreisDaten(4,holePreisausEntitytabelle(beispielRepository,plzID,tankgröße)));
         return preisliste;
     }
 
@@ -110,6 +107,9 @@ public class AnfragenService {
                 }
             }
         }
+        // preissortierung
+        neueUnternehmensliste = sortierePreise(neueUnternehmensliste);
+
         return neueUnternehmensliste;
     }
 
@@ -118,5 +118,11 @@ public class AnfragenService {
         Collections.sort(liste,Collections.reverseOrder());
         return liste;
     }
+
+    public ArrayList <Daten> sortierePreise(ArrayList <Daten> neuUnternehmensliste){
+        Collections.sort(neuUnternehmensliste);
+        return neuUnternehmensliste;
+    }
+
 
 }

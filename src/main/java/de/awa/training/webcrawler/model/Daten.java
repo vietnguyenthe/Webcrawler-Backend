@@ -1,6 +1,8 @@
 package de.awa.training.webcrawler.model;
 
-public class Daten {
+import de.awa.training.webcrawler.entity.EntityInterface;
+
+public class Daten implements Comparable<Daten>{
 
     private String id;
     private String name;
@@ -77,4 +79,20 @@ public class Daten {
                 ", preis='" + preis + '\'' +
                 '}';
     }
-}
+
+    @Override
+    public int compareTo(Daten b) {
+
+        if (b.getPreis() == null && this.getPreis() == null) {
+            return 0;
+        }
+        if (this.getPreis() == null) {
+            return 1;
+        }
+        if (b.getPreis() == null) {
+            return -1;}
+
+            return this.getPreis().compareTo(b.getPreis());
+        }
+    }
+
