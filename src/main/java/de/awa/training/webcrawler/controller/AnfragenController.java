@@ -1,35 +1,22 @@
 package de.awa.training.webcrawler.controller;
 
-import de.awa.training.webcrawler.entity.EntityInterface;
 import de.awa.training.webcrawler.entity.KontaktanfrageEntity;
-import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
-import de.awa.training.webcrawler.entity.UnternehmenEntity;
 import de.awa.training.webcrawler.model.Daten;
 import de.awa.training.webcrawler.model.Anfrage;
 import de.awa.training.webcrawler.model.KontaktAnfrage;
 import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.repository.*;
-import de.awa.training.webcrawler.services.AnfragenService;
 import de.awa.training.webcrawler.services.MailService;
 import de.awa.training.webcrawler.services.NeuerAnfragenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.internet.MimeMessage;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
 public class AnfragenController {
 
-    @Autowired
-    AnfragenService anfragenService;
+
 
     @Autowired
     KontaktanfrageRepository kontaktanfrageRepository;

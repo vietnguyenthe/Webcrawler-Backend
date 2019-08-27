@@ -4,7 +4,6 @@ import de.awa.training.webcrawler.entity.*;
 import de.awa.training.webcrawler.model.Daten;
 import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.repository.*;
-import de.awa.training.webcrawler.services.AnfragenService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,21 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.testng.annotations.BeforeTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AnfragenServiceTest {
 
-    @Mock
-    PfiffiggasRepository pfiffiggasRepository;
-
-    @Mock
-    MeinFluessiggasRepository meinFluessiggasRepository;
-
-    @Mock
-    Fluessiggas123Repository fluessiggas123Repository;
+/*
 
     @Mock
     PLZRepository plzRepository;
@@ -158,5 +149,5 @@ public class AnfragenServiceTest {
       Assert.assertEquals(sortierteListe.get(2).getId(),Integer.valueOf(1));
       Assert.assertEquals(sortierteListe.get(0).getPreis6400Liter(),"37");
     }
-
+*/
 }

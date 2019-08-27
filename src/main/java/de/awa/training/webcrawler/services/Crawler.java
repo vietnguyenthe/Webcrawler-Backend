@@ -2,9 +2,7 @@ package de.awa.training.webcrawler.services;
 
 import de.awa.training.webcrawler.entity.EntityInterface;
 import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
-import de.awa.training.webcrawler.entity.UnternehmenEntity;
 import de.awa.training.webcrawler.repository.PLZRepository;
-import de.awa.training.webcrawler.repository.PfiffiggasRepository;
 import de.awa.training.webcrawler.repository.UnternehemensRepository;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -56,14 +54,14 @@ public abstract class Crawler{
         int std = 9;
         int min = 20;
 
-        //start(9, 15, 0, "51570");
-        /*start(9, 16, 0, "52152");
+        start(9, 15, 0, "51570");
+        start(9, 16, 0, "52152");
         start(9, 17, 0, "53804");
         start(9, 18, 0, "54290");
         start(9, 19, 0, "55543");
         start(9, 20, 0, "56072");
         start(9, 21, 0, "57539");
-        start(9, 22, 0, "58119");*/
+        start(9, 22, 0, "58119");
 
     }
 

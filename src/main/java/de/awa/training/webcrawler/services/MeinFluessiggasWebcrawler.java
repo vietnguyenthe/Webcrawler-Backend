@@ -1,9 +1,7 @@
 package de.awa.training.webcrawler.services;
 
 
-import de.awa.training.webcrawler.entity.MeinfluessiggasEntity;
 import de.awa.training.webcrawler.entity.PreiseingabeUnternehmenEntity;
-import de.awa.training.webcrawler.repository.MeinFluessiggasRepository;
 import de.awa.training.webcrawler.repository.PreiseingabeUnternehmenRepository;
 import org.openqa.selenium.*;
 
@@ -14,8 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MeinFluessiggasWebcrawler extends Crawler {
 
-    @Autowired
-    MeinFluessiggasRepository repository;
 
     @Autowired
     PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
@@ -54,9 +50,6 @@ public class MeinFluessiggasWebcrawler extends Crawler {
             preis6400 = driver.findElement(By.id("priceNetto")).getText();
             waitForAction(1.0);
             driver.close();
-
-            MeinfluessiggasEntity entity = new MeinfluessiggasEntity();
-            preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400,plz);
 
             PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
             preiseInDatenbankschreiben(preiseingabeUnternehmenRepository,preiseingabeUnternehmenEntity,preis2700,preis4850,preis6400,plz);

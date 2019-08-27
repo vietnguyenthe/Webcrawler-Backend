@@ -82,7 +82,6 @@ public class Daten implements Comparable<Daten>{
 
     @Override
     public int compareTo(Daten b) {
-
         if (b.getPreis() == null && this.getPreis() == null) {
             return 0;
         }

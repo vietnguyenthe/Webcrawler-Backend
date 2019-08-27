@@ -1,10 +1,7 @@
 package de.awa.training.webcrawler.services;
 
 import de.awa.training.webcrawler.entity.*;
-import de.awa.training.webcrawler.model.PreiseingabeUnternehmen;
-import de.awa.training.webcrawler.repository.PfiffiggasRepository;
 import de.awa.training.webcrawler.repository.PreiseingabeUnternehmenRepository;
-import de.awa.training.webcrawler.repository.TestRespository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -12,20 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-
-import java.sql.Date;
 
 @Service
 public class PfiffiggasWebcrawler extends Crawler{
 
 
-    @Autowired
-    PfiffiggasRepository repository;
 
-    @Autowired
-    TestRespository testRespository;
 
     @Autowired
     PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
@@ -70,15 +60,8 @@ public class PfiffiggasWebcrawler extends Crawler{
             waitForAction(2.0);
             driver.close();
 
-            PfiffiggasEntity pfiffiggasEntity = new PfiffiggasEntity();
-            TestEntity testEntity = new TestEntity();
-            BeispielEntity beispielEntity = new BeispielEntity();
             PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
             preiseInDatenbankschreiben(preiseingabeUnternehmenRepository,preiseingabeUnternehmenEntity,preis2700,preis4850,preis6400,plz);
-            preiseInDatenbankschreiben(repository,pfiffiggasEntity,preis2700,preis4850,preis6400,plz);
-            preiseInDatenbankschreiben(repository,testEntity,preis2700,preis4850,preis6400,plz);
-            preiseInDatenbankschreiben(repository,beispielEntity,preis2700,preis4850,preis6400,plz);
-
 
         }catch (NoSuchElementException e){
             System.out.println("Crawler bei Pfiffiggas nicht erfolgreich für " + plz);
