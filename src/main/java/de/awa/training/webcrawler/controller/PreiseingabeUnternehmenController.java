@@ -49,6 +49,6 @@ public class PreiseingabeUnternehmenController {
 */
 
         preiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
-        unternehemensRepository.save(unternehmenEntity);
+        //unternehemensRepository.save(unternehmenEntity);
     }
 }

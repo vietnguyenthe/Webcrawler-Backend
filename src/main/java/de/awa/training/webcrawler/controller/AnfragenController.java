@@ -11,6 +11,7 @@ import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.repository.*;
 import de.awa.training.webcrawler.services.AnfragenService;
 import de.awa.training.webcrawler.services.MailService;
+import de.awa.training.webcrawler.services.NeuerAnfragenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -32,6 +33,9 @@ public class AnfragenController {
 
     @Autowired
     KontaktanfrageRepository kontaktanfrageRepository;
+
+    @Autowired
+    NeuerAnfragenService neuerAnfragenService;
 /*
     @Autowired
     private JavaMailSender sender;*/
@@ -43,11 +47,21 @@ public class AnfragenController {
     @PostMapping("/preis/anfrage")
     public List<Daten> anfrageerhalten(@RequestBody Anfrage test){
         String behaelter = test.getBehaelter();
-        Integer plzID = anfragenService.holePLZid(test.getPlz());
-        Integer tankgröße = anfragenService.tankgrößeInIndexumwandeln(behaelter);
-        ArrayList<PreisDaten>preisliste = anfragenService.sammlePreise(plzID,tankgröße);
-        List<Daten> liste = anfragenService.preisUnternehmenZuweisen(preisliste);
+        Integer plzID = neuerAnfragenService.holePLZid(test.getPlz());
+        Integer tankgröße = neuerAnfragenService.tankgrößeInIndexumwandeln(behaelter);
+        List<PreisDaten>preisliste = neuerAnfragenService.sammlePreise(plzID,tankgröße);
+        List<Daten> liste = neuerAnfragenService.preisUnternehmenZuweisen(preisliste);
         return liste;
+
+
+
+
+        //String behaelter = test.getBehaelter();
+        //Integer plzID = anfragenService.holePLZid(test.getPlz());
+        //Integer tankgröße = anfragenService.tankgrößeInIndexumwandeln(behaelter);
+        //ArrayList<PreisDaten>preisliste = anfragenService.sammlePreise(plzID,tankgröße);
+        //List<Daten> liste = anfragenService.preisUnternehmenZuweisen(preisliste);
+        //return liste;
     }
 
 

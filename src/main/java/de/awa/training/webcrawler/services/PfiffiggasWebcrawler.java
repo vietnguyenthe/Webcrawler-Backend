@@ -1,10 +1,9 @@
 package de.awa.training.webcrawler.services;
 
-import de.awa.training.webcrawler.entity.BeispielEntity;
-import de.awa.training.webcrawler.entity.EntityInterface;
-import de.awa.training.webcrawler.entity.PfiffiggasEntity;
-import de.awa.training.webcrawler.entity.TestEntity;
+import de.awa.training.webcrawler.entity.*;
+import de.awa.training.webcrawler.model.PreiseingabeUnternehmen;
 import de.awa.training.webcrawler.repository.PfiffiggasRepository;
+import de.awa.training.webcrawler.repository.PreiseingabeUnternehmenRepository;
 import de.awa.training.webcrawler.repository.TestRespository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -27,6 +26,9 @@ public class PfiffiggasWebcrawler extends Crawler{
 
     @Autowired
     TestRespository testRespository;
+
+    @Autowired
+    PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
     private final int UnternehmensID = 1;
 
@@ -71,9 +73,12 @@ public class PfiffiggasWebcrawler extends Crawler{
             PfiffiggasEntity pfiffiggasEntity = new PfiffiggasEntity();
             TestEntity testEntity = new TestEntity();
             BeispielEntity beispielEntity = new BeispielEntity();
+            PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
+            preiseInDatenbankschreiben(preiseingabeUnternehmenRepository,preiseingabeUnternehmenEntity,preis2700,preis4850,preis6400,plz);
             preiseInDatenbankschreiben(repository,pfiffiggasEntity,preis2700,preis4850,preis6400,plz);
             preiseInDatenbankschreiben(repository,testEntity,preis2700,preis4850,preis6400,plz);
             preiseInDatenbankschreiben(repository,beispielEntity,preis2700,preis4850,preis6400,plz);
+
 
         }catch (NoSuchElementException e){
             System.out.println("Crawler bei Pfiffiggas nicht erfolgreich für " + plz);

@@ -1,7 +1,9 @@
 package de.awa.training.webcrawler.services;
 
 import de.awa.training.webcrawler.entity.Fluessiggas123Entity;
+import de.awa.training.webcrawler.entity.PreiseingabeUnternehmenEntity;
 import de.awa.training.webcrawler.repository.Fluessiggas123Repository;
+import de.awa.training.webcrawler.repository.PreiseingabeUnternehmenRepository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +20,9 @@ public class Fluessiggas123 extends Crawler {
 
     @Autowired
     Fluessiggas123Repository repository;
+
+    @Autowired
+    PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
     private final int UnternehmensID = 3;
 
@@ -114,6 +119,9 @@ public class Fluessiggas123 extends Crawler {
 
             Fluessiggas123Entity entity = new Fluessiggas123Entity();
             preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400,plz);
+
+            PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
+            preiseInDatenbankschreiben(preiseingabeUnternehmenRepository,preiseingabeUnternehmenEntity,preis2700,preis4850,preis6400,plz);
 
         }catch (NoSuchElementException e){
             System.out.println("Crawler bei Flüssiggas123 nicht erfolgreich für " + plz);

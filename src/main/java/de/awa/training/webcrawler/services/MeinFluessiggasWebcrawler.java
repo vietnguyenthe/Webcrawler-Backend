@@ -2,7 +2,9 @@ package de.awa.training.webcrawler.services;
 
 
 import de.awa.training.webcrawler.entity.MeinfluessiggasEntity;
+import de.awa.training.webcrawler.entity.PreiseingabeUnternehmenEntity;
 import de.awa.training.webcrawler.repository.MeinFluessiggasRepository;
+import de.awa.training.webcrawler.repository.PreiseingabeUnternehmenRepository;
 import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,6 +16,9 @@ public class MeinFluessiggasWebcrawler extends Crawler {
 
     @Autowired
     MeinFluessiggasRepository repository;
+
+    @Autowired
+    PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
     private final int UnternehmensID = 2;
 
@@ -52,6 +57,9 @@ public class MeinFluessiggasWebcrawler extends Crawler {
 
             MeinfluessiggasEntity entity = new MeinfluessiggasEntity();
             preiseInDatenbankschreiben(repository,entity,preis2700,preis4850,preis6400,plz);
+
+            PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
+            preiseInDatenbankschreiben(preiseingabeUnternehmenRepository,preiseingabeUnternehmenEntity,preis2700,preis4850,preis6400,plz);
 
         }catch (NoSuchElementException e) {
             //e.printStackTrace();
