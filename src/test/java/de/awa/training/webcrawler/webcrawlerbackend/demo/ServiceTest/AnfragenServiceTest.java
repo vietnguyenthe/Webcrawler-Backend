@@ -18,8 +18,6 @@ import java.util.List;
 
 public class AnfragenServiceTest {
 
-
-
     @Mock
     PLZRepository plzRepository;
 
