@@ -55,8 +55,8 @@ public class PreiseingabeUnternehmenController {
                 int plz = 0;
                 for(PostleitzahlenEntity i: plzRepository.findAll()){
                     if(preiseingabeUnternehmen.getPostleitzahl().equals(i.getPlz())){
-                       plzEnthalten = true;
-                       plz = i.getId();
+                        plzEnthalten = true;
+                        plz = i.getId();
                     }
                 }
 
