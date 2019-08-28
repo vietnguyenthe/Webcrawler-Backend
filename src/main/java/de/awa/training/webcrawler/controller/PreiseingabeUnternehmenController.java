@@ -35,7 +35,8 @@ public class PreiseingabeUnternehmenController {
 
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/preiseingabe")
-    public void preiseingabe(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen) {
-        loginService.preiseingabeLogin(preiseingabeUnternehmen);
+    public String preiseingabe(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen) {
+        String returnStatement = loginService.preiseingabeLogin(preiseingabeUnternehmen);
+        return returnStatement;
     }
 }

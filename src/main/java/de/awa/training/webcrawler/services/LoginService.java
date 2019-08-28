@@ -52,9 +52,10 @@ public class LoginService {
     }
 
 
-    public void preiseingabeLogin(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen) {
+    public String preiseingabeLogin(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen) {
         // Voraussetzungen: PreiseingabeUnternehmenEntity erstellt um Daten in Datenbank abspeichern zu können
         PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
+        String returnStatement = "fehlgeschlagen";
 
         // Dateneingabe gehört zu welchem Unternehmen? Nach UN_Id suchen und festlegen anhand des Passwortes
 /*        String f = preiseingabeUnternehmen.getKennwort();
@@ -91,8 +92,13 @@ public class LoginService {
 
                 // speichern in Datenbank PreisEingabeUnternehmenEntity!
                 preiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
+
+                // return Statement erfolgreich setzen.
+                returnStatement = "erfolgreich";
             }
         }
+
+        return returnStatement;
     }
 
 
