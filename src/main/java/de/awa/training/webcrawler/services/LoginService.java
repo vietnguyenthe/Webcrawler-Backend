@@ -26,6 +26,8 @@ public class LoginService {
     @Autowired
     PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
+    int aktuellerNutzer;
+
 
     public String checkLoginDaten(@RequestBody de.awa.training.webcrawler.model.Login login) {
         // Login Logik
@@ -34,12 +36,13 @@ public class LoginService {
         // dann return "erfolgreich" sonst "fehlgeschlagen"
         String returnStatement = null;
         String p = login.getLoginPasswort();
-        int passwortGehashed = p.hashCode();
+        aktuellerNutzer = p.hashCode();
 
         for (UnternehmenEntity unternehmen : unternehemensRepository.findAll()) {
-            if (unternehmen.getBenutzername().equals(login.getLoginName()) && unternehmen.getPasswort().equals(passwortGehashed)) {
+            if (unternehmen.getBenutzername().equals(login.getLoginName()) && unternehmen.getPasswort().equals(aktuellerNutzer)) {
                 returnStatement = "erfolgreich";
                 break;
+
             }
             else {
                 returnStatement = "fehlgeschlagen";
@@ -54,11 +57,11 @@ public class LoginService {
         PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
 
         // Dateneingabe gehört zu welchem Unternehmen? Nach UN_Id suchen und festlegen anhand des Passwortes
-        String f = preiseingabeUnternehmen.getKennwort();
-        int m = f.hashCode();
+/*        String f = preiseingabeUnternehmen.getKennwort();
+        int m = f.hashCode();*/
 
         for(UnternehmenEntity k : unternehemensRepository.findAll()){
-            if( k.getPasswort().equals(m)){
+            if( k.getPasswort().equals(aktuellerNutzer)){
                 preiseingabeUnternehmenEntity.setUnternehmenId(k.getId());
 
                 // Danach Json Daten vom Frontend in PreisEingabeUnternehmenEntity(Datenbank) speichern
@@ -91,6 +94,7 @@ public class LoginService {
             }
         }
     }
+
 
 
 
