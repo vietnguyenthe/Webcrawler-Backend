@@ -38,6 +38,7 @@ public class AnfragenController {
         Integer tankgröße = neuerAnfragenService.tankgrößeInIndexumwandeln(behaelter);
         List<PreisDaten>preisliste = neuerAnfragenService.sammlePreise(plzID,tankgröße);
         List<Daten> liste = neuerAnfragenService.preisUnternehmenZuweisen(preisliste);
+        liste = neuerAnfragenService.filtereUnternehmenOhnePreis(liste);
         return liste;
 
 

@@ -112,6 +112,17 @@ public class NeuerAnfragenService {
         return liste;
     }
 
+    public List<Daten> filtereUnternehmenOhnePreis(List<Daten> liste){
+        List<Daten> gefilterteListe = new ArrayList<>();
+        for(Daten daten:liste){
+            if(!daten.getPreis().equals("Kein Preis gefunden")){
+                gefilterteListe.add(daten);
+            }
+        }
+        return gefilterteListe;
+    }
+
+
 }
 
 
