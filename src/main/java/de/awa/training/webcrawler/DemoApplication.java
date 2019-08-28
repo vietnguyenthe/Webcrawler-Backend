@@ -39,6 +39,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    //befüllt die Datenbank mit Testdaten falls die noch nicht vorhanden sind und führt die Crawler aus.
     @PostConstruct
     private void init() {
         String[]postleitzahlen = {"51570","52152","53804", "54290","55543","56072","57539","58119"};
