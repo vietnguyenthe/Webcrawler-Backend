@@ -23,8 +23,9 @@ public class PreiseingabeUnternehmenEntity implements EntityInterface{
     public PreiseingabeUnternehmenEntity() {
     }
 
-    public PreiseingabeUnternehmenEntity(String preis2700Liter, String preis4850Liter, String preis6400Liter,
+    public PreiseingabeUnternehmenEntity(Integer id,String preis2700Liter, String preis4850Liter, String preis6400Liter,
                                           Integer postleitzahlenId, Integer unternehmenId) {
+        this.id =id;
         this.preis2700Liter = preis2700Liter;
         this.preis4850Liter = preis4850Liter;
         this.preis6400Liter = preis6400Liter;

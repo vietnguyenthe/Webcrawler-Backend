@@ -43,17 +43,17 @@ public class AnfragenServiceTest {
         gemockteUternehmen.add(new UnternehmenEntity(2,"DFG Deutsche Flüssiggas GmbH","Stau 169","262122","Oldenburg"));
         gemockteUternehmen.add(new UnternehmenEntity(3,"TEGA - Technische Gase und Gasetechnik GmbH", "Blumenstraße 70","99092", "Erfurt"));
 
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("29","30","31",1,1));
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("32","33","34",1,1));
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("35","36","37",1,1));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(1,"29","30","31",1,1));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(2,"32","33","34",1,1));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(3,"35","36","37",1,1));
 
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("39","40","41",1,2));
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("42","43","44",1,2));
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("45","46","47",1,2));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(4,"39","40","41",1,2));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(5,"42","43","44",1,2));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(6,"45","46","47",1,2));
 
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("49","50","51",1,2));
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("52","53","54",1,2));
-        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity("55","56","57",1,2));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(7,"49","50","51",1,3));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(8,"52","53","54",1,3));
+        gemockteListePreisliste.add(new PreiseingabeUnternehmenEntity(9,"55","56","57",1,3));
 
         plzliste.add(new PostleitzahlenEntity(1,"51570"));
         plzliste.add(new PostleitzahlenEntity(2,"52152"));
@@ -90,10 +90,10 @@ public class AnfragenServiceTest {
         Mockito.when(preiseingabeUnternehmenRepository.findAll()).thenReturn(gemockteListePreisliste);
         String ergebnis = neuerAnfragenService.holePreisausEntitytabelle(preiseingabeUnternehmenRepository,1,1,0);
         String ergebnis2 = neuerAnfragenService.holePreisausEntitytabelle(preiseingabeUnternehmenRepository,1,1,1);
-        String ergebnis3 = neuerAnfragenService.holePreisausEntitytabelle(preiseingabeUnternehmenRepository,1,2,3);
+        String ergebnis3 = neuerAnfragenService.holePreisausEntitytabelle(preiseingabeUnternehmenRepository,2,2,2);
         Assert.assertEquals(ergebnis,"35");
         Assert.assertEquals(ergebnis2,"36");
-        Assert.assertEquals(ergebnis3,"Kein Wert für die PLZ gefunden");
+        Assert.assertEquals(ergebnis3,"Kein Preis gefunden");
     }
 
 
@@ -101,13 +101,12 @@ public class AnfragenServiceTest {
     public void sammlePreiseTEST(){
         MockitoAnnotations.initMocks(this);
         Mockito.when(preiseingabeUnternehmenRepository.findAll()).thenReturn(gemockteListePreisliste);
-
+        Mockito.when(unternehemensRepository.findAll()).thenReturn(gemockteUternehmen);
         List<PreisDaten> erwarteteListe = neuerAnfragenService.sammlePreise(1,1);
-
         Assert.assertEquals(erwarteteListe.size(),3);
-        Assert.assertEquals(erwarteteListe.get(0).toString(),new PreisDaten(3,"56").toString());
+        Assert.assertEquals(erwarteteListe.get(0).toString(),new PreisDaten(1,"36").toString());
         Assert.assertEquals(erwarteteListe.get(1).toString(),new PreisDaten(2,"46").toString());
-        Assert.assertEquals(erwarteteListe.get(2).toString(),new PreisDaten(1,"36").toString());
+        Assert.assertEquals(erwarteteListe.get(2).toString(),new PreisDaten(3,"56").toString());
     }
 
     @Test
@@ -142,8 +141,8 @@ public class AnfragenServiceTest {
       MockitoAnnotations.initMocks(this);
       Mockito.when(preiseingabeUnternehmenRepository.findAll()).thenReturn(gemockteListePreisliste);
       List<EntityInterface> sortierteListe = neuerAnfragenService.sortiereAbsteigend(preiseingabeUnternehmenRepository);
-      Assert.assertEquals(sortierteListe.get(0).getId(),Integer.valueOf(3));
-      Assert.assertEquals(sortierteListe.get(2).getId(),Integer.valueOf(1));
-      Assert.assertEquals(sortierteListe.get(0).getPreis6400Liter(),"37");
+      Assert.assertEquals(sortierteListe.get(0).getId(),Integer.valueOf(9));
+      Assert.assertEquals(sortierteListe.get(2).getId(),Integer.valueOf(7));
+      Assert.assertEquals(sortierteListe.get(0).getPreis6400Liter(),"57");
     }
 }

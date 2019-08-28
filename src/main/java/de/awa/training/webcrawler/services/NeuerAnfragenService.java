@@ -66,8 +66,8 @@ public class NeuerAnfragenService {
 
     public List<PreisDaten> sammlePreise(Integer plz, Integer tankgröße) {
         List<PreisDaten> preisliste = new ArrayList<>();
-        List<Daten> unternehmensliste = unternehmensDatenGenerieren();
-        for (int x = 1; x <= unternehmensliste.size(); x++) {
+       // List<Daten> unternehmensliste = unternehmensDatenGenerieren();
+        for (int x = 1; x <= unternehemensRepository.findAll().size(); x++) {
             preisliste.add(new PreisDaten(x, holePreisausEntitytabelle(preiseingabeUnternehmenRepository, plz, x, tankgröße)));
         }
         return preisliste;

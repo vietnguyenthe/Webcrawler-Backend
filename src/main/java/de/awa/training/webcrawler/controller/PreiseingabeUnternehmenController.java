@@ -76,7 +76,6 @@ public class PreiseingabeUnternehmenController {
                 // speichern in Datenbank PreisEingabeUnternehmenEntity!
                 preiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
             }
-
         }
 
 
