@@ -32,6 +32,8 @@ public class NeuerAnfragenService {
     @Autowired
     PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
+
+    // sucht für die übergebene Postleitzahl die zugehörige ID in der Datenbank.
     public Integer holePLZid(String plz) {
         Integer gesuchtePLZid = null;
         List<PostleitzahlenEntity> plzListe = plzRepository.findAll();
@@ -44,6 +46,7 @@ public class NeuerAnfragenService {
         return null;
     }
 
+    //Wandelt die Behältereingabe in Indexwerte um. Damit diese in anderen Methoden verwendet werden.
     public Integer tankgrößeInIndexumwandeln(String behaelter) {
         if (behaelter.equals("preis2700liter")) {
             return 0;
@@ -55,6 +58,7 @@ public class NeuerAnfragenService {
         return null;
     }
 
+    //generiert eine Model Liste mit Datenobjekten, bei denen nur die Eigenschafft Preis nicht gesetzt ist.
     public ArrayList<Daten> unternehmensDatenGenerieren() {
         List<UnternehmenEntity> listeUnternehmen = unternehemensRepository.findAll();
         ArrayList<Daten> liste = new ArrayList<>();
@@ -64,6 +68,7 @@ public class NeuerAnfragenService {
         return liste;
     }
 
+    //sammelt die richtigen Preise für die Postleitzahl und die Tankgröße und speichert sie in einer preisListe mit Unternehmen ID
     public List<PreisDaten> sammlePreise(Integer plz, Integer tankgröße) {
         List<PreisDaten> preisliste = new ArrayList<>();
        // List<Daten> unternehmensliste = unternehmensDatenGenerieren();
@@ -72,7 +77,7 @@ public class NeuerAnfragenService {
         }
         return preisliste;
     }
-
+   //gibt den richtigen Preis für die Parameter als String zurück.
     public String holePreisausEntitytabelle(JpaRepository repository, Integer plz, Integer id, Integer tankgröße) {
         List<EntityInterface> allePreise = sortiereAbsteigend(repository);
         List<String> leereListe = new ArrayList<>();
@@ -86,7 +91,7 @@ public class NeuerAnfragenService {
         }
         return "Kein Preis gefunden";
     }
-
+    // weisst der Liste mit Unternehmensdaten Objekten anhand der Preisliste die richtigen Preis zu.
     public List<Daten> preisUnternehmenZuweisen(List<PreisDaten> preisliste){
         List<Daten>neueUnternehmensliste = unternehmensDatenGenerieren();
         for (Daten unternehmen:neueUnternehmensliste) {
@@ -100,18 +105,20 @@ public class NeuerAnfragenService {
         return neueUnternehmensliste;
     }
 
+    // sortiert die Daten Liste nach dem Attribut Preise aufsteigend
     public List <Daten> sortierePreise(List <Daten> neuUnternehmensliste){
         Collections.sort(neuUnternehmensliste);
         return neuUnternehmensliste;
     }
 
-
+    //sortiert die ID absteigend
     public List<EntityInterface> sortiereAbsteigend(JpaRepository repository){
         List<EntityInterface> liste = repository.findAll();
         Collections.sort(liste,Collections.reverseOrder());
         return liste;
     }
 
+    //filtert die Unternehmen heraus die keine Preise anbieten für die Postleitzahl
     public List<Daten> filtereUnternehmenOhnePreis(List<Daten> liste){
         List<Daten> gefilterteListe = new ArrayList<>();
         for(Daten daten:liste){

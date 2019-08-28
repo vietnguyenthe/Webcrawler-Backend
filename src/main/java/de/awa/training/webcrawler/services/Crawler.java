@@ -28,6 +28,7 @@ public abstract class Crawler{
 
     private int UnternehmensID;
 
+    // starte den Crawler für die KindKlassen die, die Methode tankcrawlen implementieren
     public void start(int std, int min, int sek, String plz) throws ParseException, NoSuchElementException {
         Calendar today = Calendar.getInstance();
         today.set(Calendar.HOUR_OF_DAY, std);
@@ -47,15 +48,16 @@ public abstract class Crawler{
         timer.scheduleAtFixedRate(timerTask, today.getTime(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
     }
 
-
+    // Definiert wie jede KindKlasse eine Internetseite crawlet.
     public abstract void tankcrawlen(String plz, WebDriver driver, ChromeOptions chromeOptions) throws NoSuchElementException;
 
+    // Führt die start methode für alle Postleitzahlen aus die wir in der Mehode definieren
     public void allePLZCrawlen() throws ParseException,NoSuchElementException {
         int std = 9;
         int min = 20;
 
-        /*start(9, 15, 0, "51570");
-        start(9, 16, 0, "52152");
+        start(9, 15, 0, "51570");
+        /*start(9, 16, 0, "52152");
         start(9, 17, 0, "53804");
         start(9, 18, 0, "54290");
         start(9, 19, 0, "55543");
@@ -65,6 +67,7 @@ public abstract class Crawler{
 
     }
 
+    //Definiert wie die Preise die gecrawlt werden in der Datenbank abgespeichert werden.
     public void preiseInDatenbankschreiben(JpaRepository repository,
                                            EntityInterface entityInterface,
                                            String preis2700,
@@ -83,6 +86,7 @@ public abstract class Crawler{
         repository.save(entityInterface);
     }
 
+    //sucht zu den Postleitzahlen String den richtigen Preis raus.
     public Integer suchePLZ(String plz){
         List<PostleitzahlenEntity> liste = plzRepository.findAll();
         Integer plzID = null;
@@ -94,7 +98,7 @@ public abstract class Crawler{
         return plzID;
     }
 
-
+    //lässt den Thread für den wert an millisekunden stehen, der der Methode übergeben wird.
     public static void waitForAction(final double time) {
         try {
             Thread.sleep((int) (time * 1000));
