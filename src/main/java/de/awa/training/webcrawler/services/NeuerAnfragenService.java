@@ -1,18 +1,18 @@
 package de.awa.training.webcrawler.services;
 
-import de.awa.training.webcrawler.entity.EntityInterface;
-import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
-import de.awa.training.webcrawler.entity.PreiseingabeUnternehmenEntity;
-import de.awa.training.webcrawler.entity.UnternehmenEntity;
+import de.awa.training.webcrawler.entity.*;
 import de.awa.training.webcrawler.model.Daten;
+import de.awa.training.webcrawler.model.KontaktAnfrage;
 import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.model.PreiseingabeUnternehmen;
+import de.awa.training.webcrawler.repository.KontaktanfrageRepository;
 import de.awa.training.webcrawler.repository.PLZRepository;
 import de.awa.training.webcrawler.repository.PreiseingabeUnternehmenRepository;
 import de.awa.training.webcrawler.repository.UnternehemensRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +31,16 @@ public class NeuerAnfragenService {
 
     @Autowired
     PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
+
+
+    @Autowired
+    KontaktanfrageRepository kontaktanfrageRepository;
+
+    @Autowired
+    NeuerAnfragenService neuerAnfragenService;
+
+    @Autowired
+    private MailService mailService;
 
 
     // sucht für die übergebene Postleitzahl die zugehörige ID in der Datenbank.
@@ -127,6 +137,28 @@ public class NeuerAnfragenService {
             }
         }
         return gefilterteListe;
+    }
+
+
+    // Kontaktanfrage in Datenbank speichern und Mail erhalten bei jeder Kontaktanfrage
+    public void kontaktanfrageSpeichernSchicken(@RequestBody KontaktAnfrage kontaktAnfrage) {
+        // Entity Kontaktanfrage erstellen und dann die erhaltenen Daten mit dem Setter und getter festlegen + speichern
+        KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
+
+        kontaktanfrageEntity.setBetreff(kontaktAnfrage.getBetreff());
+        kontaktanfrageEntity.setFirmennamen(kontaktAnfrage.getFirmennamen());
+        kontaktanfrageEntity.setFirmenadresse(kontaktAnfrage.getFirmenadresse());
+        kontaktanfrageEntity.setOrt(kontaktAnfrage.getOrt());
+        kontaktanfrageEntity.setPlz(kontaktAnfrage.getPlz());
+        kontaktanfrageEntity.setOrt(kontaktAnfrage.getOrt());
+        kontaktanfrageEntity.setKontaktperson(kontaktAnfrage.getKontaktperson());
+        kontaktanfrageEntity.setEmailAdresse(kontaktAnfrage.getEmailAdresse());
+        kontaktanfrageEntity.setNachricht(kontaktAnfrage.getNachricht());
+
+        kontaktanfrageRepository.save(kontaktanfrageEntity);
+
+        // Email an das Flüssiggas Team senden mit den nötigen Informationen
+        mailService.mailSendenKontaktanfrage(kontaktAnfrage);
     }
 
 

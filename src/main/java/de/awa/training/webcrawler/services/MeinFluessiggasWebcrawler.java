@@ -16,6 +16,9 @@ public class MeinFluessiggasWebcrawler extends Crawler {
     @Autowired
     PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
+    @Autowired
+    MailService mailService;
+
     private final int UnternehmensID = 2;
 
     public int getUnternehmensID() {
@@ -57,8 +60,10 @@ public class MeinFluessiggasWebcrawler extends Crawler {
         }catch (NoSuchElementException e) {
             //e.printStackTrace();
             System.out.println("Crawler bei MeinFlüssiggas nicht erfolgreich für " + plz);
+            mailService.mailSendenException("Crawler konnte nicht durchgeführt werden", "Crawler Fehler", "MeinFluessiggas");
 
-    }finally {
+
+        }finally {
             driver.quit();
         }
     }

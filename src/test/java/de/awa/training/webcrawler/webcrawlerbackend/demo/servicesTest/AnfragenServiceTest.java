@@ -1,4 +1,4 @@
-package de.awa.training.webcrawler.webcrawlerbackend.demo.ServiceTest;
+package de.awa.training.webcrawler.webcrawlerbackend.demo.servicesTest;
 
 import de.awa.training.webcrawler.entity.*;
 import de.awa.training.webcrawler.model.Daten;

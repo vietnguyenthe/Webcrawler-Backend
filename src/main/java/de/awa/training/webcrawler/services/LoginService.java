@@ -42,7 +42,6 @@ public class LoginService {
             if (unternehmen.getBenutzername().equals(login.getLoginName()) && unternehmen.getPasswort().equals(aktuellerNutzer)) {
                 returnStatement = "erfolgreich";
                 break;
-
             }
             else {
                 returnStatement = "fehlgeschlagen";

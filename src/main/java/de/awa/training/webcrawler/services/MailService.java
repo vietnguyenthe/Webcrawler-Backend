@@ -45,7 +45,7 @@ public class MailService {
             helper.setTo("TeamFluessiggas@Crawler.com");
             helper.setText(a);
             helper.setSubject(b);
-            helper.setFrom(c);
+            helper.setFrom(c); //
 
             sender.send(message);
 

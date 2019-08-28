@@ -20,6 +20,9 @@ public class PfiffiggasWebcrawler extends Crawler{
     @Autowired
     PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
+    @Autowired
+    MailService mailService;
+
     private final int UnternehmensID = 1;
 
     public int getUnternehmensID() {
@@ -65,6 +68,8 @@ public class PfiffiggasWebcrawler extends Crawler{
 
         }catch (NoSuchElementException e){
             System.out.println("Crawler bei Pfiffiggas nicht erfolgreich für " + plz);
+            mailService.mailSendenException("Crawler konnte nicht durchgeführt werden", "Crawler Fehler", "Pfiffiggas");
+
         }finally {
             driver.quit();
         }
