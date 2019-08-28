@@ -42,8 +42,6 @@ public class AnfragenController {
         return liste;
 
 
-
-
         //String behaelter = test.getBehaelter();
         //Integer plzID = anfragenService.holePLZid(test.getPlz());
         //Integer tankgröße = anfragenService.tankgrößeInIndexumwandeln(behaelter);

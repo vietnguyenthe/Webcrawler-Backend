@@ -1,5 +1,6 @@
-package de.awa.training.webcrawler.controller;
+package de.awa.training.webcrawler.services;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import de.awa.training.webcrawler.entity.PostleitzahlenEntity;
 import de.awa.training.webcrawler.entity.PreiseingabeUnternehmenEntity;
 import de.awa.training.webcrawler.entity.UnternehmenEntity;
@@ -7,21 +8,14 @@ import de.awa.training.webcrawler.model.PreiseingabeUnternehmen;
 import de.awa.training.webcrawler.repository.PLZRepository;
 import de.awa.training.webcrawler.repository.PreiseingabeUnternehmenRepository;
 import de.awa.training.webcrawler.repository.UnternehemensRepository;
-import de.awa.training.webcrawler.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
 
-@RestController
-public class PreiseingabeUnternehmenController {
-
-    @Autowired
-    PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
-
+@Service
+public class LoginService {
 
     @Autowired
     UnternehemensRepository unternehemensRepository;
@@ -30,47 +24,33 @@ public class PreiseingabeUnternehmenController {
     PLZRepository plzRepository;
 
     @Autowired
-    LoginService loginService;
+    PreiseingabeUnternehmenRepository preiseingabeUnternehmenRepository;
 
 
-    @CrossOrigin("http://localhost:3000")
-    @PostMapping("/preiseingabe")
-    public void preiseingabe(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen) {
-        loginService.preiseingabeLogin(preiseingabeUnternehmen);
+    public String checkLoginDaten(@RequestBody de.awa.training.webcrawler.model.Login login) {
+        // Login Logik
+        // Json Objekt vom Frontend (LoginName und Passwort) annehmen und in der Methode checken
+        // Loginname und passwort mit Datenbank vergleichen (UnternehmenEntits) wenn beide richtig
+        // dann return "erfolgreich" sonst "fehlgeschlagen"
+        String returnStatement = null;
+        String p = login.getLoginPasswort();
+        int passwortGehashed = p.hashCode();
 
-
-/*      else if (!plzRepository.findAll().contains(i.getPlz())){
-            PostleitzahlenEntity postleitzahlenEntity = new PostleitzahlenEntity();
-            postleitzahlenEntity.setPlz(preiseingabeUnternehmen.getPostleitzahl());
-            plzRepository.save(postleitzahlenEntity);
-        }*/
-
-//        i.getPlz().equals(preiseingabeUnternehmen.getPostleitzahl())
-
-
-
-/*        PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
-        UnternehmenEntity unternehmenEntity = new UnternehmenEntity();
-
-        preiseingabeUnternehmenEntity.setPreis2700Liter(preiseingabeUnternehmen.getPreis2700Liter());
-        preiseingabeUnternehmenEntity.setPreis4850Liter(preiseingabeUnternehmen.getPreis4850Liter());
-        preiseingabeUnternehmenEntity.setPreis6400Liter(preiseingabeUnternehmen.getPreis6400Liter());
-        preiseingabeUnternehmenEntity.setDatum(new Date(new java.util.Date().getTime()));
-        preiseingabeUnternehmenEntity.setId(unternehmenEntity.getId());*/
-
-/*
-        unternehmenEntity.setAdresse(preiseingabeUnternehmen.getAdresse());
-        unternehmenEntity.setName(preiseingabeUnternehmen.getName());
-        unternehmenEntity.setOrt(preiseingabeUnternehmen.getOrt());
-        unternehmenEntity.setPlz(preiseingabeUnternehmen.getPlz());
-*/
-/*
-        preiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
-        unternehemensRepository.save(unternehmenEntity);*/
+        for (UnternehmenEntity unternehmen : unternehemensRepository.findAll()) {
+            if (unternehmen.getBenutzername().equals(login.getLoginName()) && unternehmen.getPasswort().equals(passwortGehashed)) {
+                returnStatement = "erfolgreich";
+                break;
+            }
+            else {
+                returnStatement = "fehlgeschlagen";
+            }
+        }
+        return returnStatement;
     }
 
-/*    public void preiseingabeLogin(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen) {
-        // Voraussetzungen
+
+    public void preiseingabeLogin(@RequestBody PreiseingabeUnternehmen preiseingabeUnternehmen) {
+        // Voraussetzungen: PreiseingabeUnternehmenEntity erstellt um Daten in Datenbank abspeichern zu können
         PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
 
         // Dateneingabe gehört zu welchem Unternehmen? Nach UN_Id suchen und festlegen anhand des Passwortes
@@ -106,13 +86,13 @@ public class PreiseingabeUnternehmenController {
                     preiseingabeUnternehmenEntity.setPostleitzahlenId(postleitzahlenEntity.getId());
                 }
 
-*//*                preiseingabeUnternehmenEntity.setPostleitzahlenId(i.getId());
-                System.out.println("Richtige Plz gefunden: " +  i.getPlz());
-                *//*
-
                 // speichern in Datenbank PreisEingabeUnternehmenEntity!
                 preiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
             }
         }
-    }*/
+    }
+
+
+
+
 }
