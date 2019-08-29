@@ -46,8 +46,8 @@ public class AnfragenController {
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/kontaktUnternehmen")
     public String unternehmensAnfrage (@RequestBody KontaktAnfrage kontaktAnfrage){
-        neuerAnfragenService.kontaktanfrageSpeichernSchicken(kontaktAnfrage);
-        return "erfolgreich";
+        String antwort = neuerAnfragenService.kontaktanfrageSpeichernSchicken(kontaktAnfrage);
+        return antwort;
  }
 
 }

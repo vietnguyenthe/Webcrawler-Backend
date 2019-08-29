@@ -138,10 +138,20 @@ public class NeuerAnfragenService {
 
 
     // Kontaktanfrage in Datenbank speichern und Mail erhalten bei jeder Kontaktanfrage
-    public void kontaktanfrageSpeichernSchicken(@RequestBody KontaktAnfrage kontaktAnfrage) {
+    public String kontaktanfrageSpeichernSchicken(@RequestBody KontaktAnfrage kontaktAnfrage) {
         // Entity Kontaktanfrage erstellen und dann die erhaltenen Daten mit dem Setter und getter festlegen + speichern
-        KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
+        if(kontaktAnfrage.getNachricht().equals("") ||
+            kontaktAnfrage.getBetreff().equals("")||
+            kontaktAnfrage.getEmailAdresse().equals("")||
+            kontaktAnfrage.getFirmenadresse().equals("")||
+            kontaktAnfrage.getKontaktperson().equals("")||
+            kontaktAnfrage.getOrt().equals("")||
+            kontaktAnfrage.getFirmennamen().equals("")||
+            kontaktAnfrage.getPlz().equals("")
+        ){return "fehlgeschlagen";
+        }else{
 
+        KontaktanfrageEntity kontaktanfrageEntity = new KontaktanfrageEntity();
         kontaktanfrageEntity.setBetreff(kontaktAnfrage.getBetreff());
         kontaktanfrageEntity.setFirmennamen(kontaktAnfrage.getFirmennamen());
         kontaktanfrageEntity.setFirmenadresse(kontaktAnfrage.getFirmenadresse());
@@ -156,9 +166,8 @@ public class NeuerAnfragenService {
 
         // Email an das Flüssiggas Team senden mit den nötigen Informationen
         mailService.mailSendenKontaktanfrage(kontaktAnfrage);
+        return "erfolgreich";}
     }
-
-
 }
 
 
