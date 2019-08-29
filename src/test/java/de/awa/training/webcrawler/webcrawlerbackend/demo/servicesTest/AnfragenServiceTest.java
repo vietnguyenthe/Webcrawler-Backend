@@ -143,4 +143,18 @@ public class AnfragenServiceTest {
       Assert.assertEquals(sortierteListe.get(2).getId(),Integer.valueOf(7));
       Assert.assertEquals(sortierteListe.get(0).getPreis6400Liter(),"57");
     }
+
+    @Test
+    public void filtereUnternehmenOhnePreisTEST(){
+        MockitoAnnotations.initMocks(this);
+        Mockito.when(unternehemensRepository.findAll()).thenReturn(gemockteUternehmen);
+        List<Daten>daten   = neuerAnfragenService.unternehmensDatenGenerieren();
+        daten.get(0).setPreis("40");
+        daten.get(1).setPreis("Kein Preis gefunden");
+        daten.get(2).setPreis("30");
+        daten = neuerAnfragenService.filtereUnternehmenOhnePreis(daten);
+        Assert.assertEquals(daten.size(),2);
+        Assert.assertEquals(daten.get(0).getPreis(),"40");
+        Assert.assertEquals(daten.get(1).getPreis(),"30");
+    }
 }

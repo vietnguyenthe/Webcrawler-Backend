@@ -37,9 +37,6 @@ public class NeuerAnfragenService {
     KontaktanfrageRepository kontaktanfrageRepository;
 
     @Autowired
-    NeuerAnfragenService neuerAnfragenService;
-
-    @Autowired
     private MailService mailService;
 
 

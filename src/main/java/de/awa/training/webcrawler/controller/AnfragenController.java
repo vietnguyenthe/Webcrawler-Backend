@@ -38,13 +38,6 @@ public class AnfragenController {
         liste = neuerAnfragenService.filtereUnternehmenOhnePreis(liste);
         return liste;
 
-
-        //String behaelter = test.getBehaelter();
-        //Integer plzID = anfragenService.holePLZid(test.getPlz());
-        //Integer tankgröße = anfragenService.tankgrößeInIndexumwandeln(behaelter);
-        //ArrayList<PreisDaten>preisliste = anfragenService.sammlePreise(plzID,tankgröße);
-        //List<Daten> liste = anfragenService.preisUnternehmenZuweisen(preisliste);
-        //return liste;
     }
 
 
