@@ -1,10 +1,9 @@
-package de.awa.training.webcrawler.webcrawlerbackend.demo.servicesTest;
+package de.awa.training.webcrawler.services;
 
 import de.awa.training.webcrawler.entity.*;
 import de.awa.training.webcrawler.model.Daten;
 import de.awa.training.webcrawler.model.PreisDaten;
 import de.awa.training.webcrawler.repository.*;
-import de.awa.training.webcrawler.services.NeuerAnfragenService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

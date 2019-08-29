@@ -56,46 +56,52 @@ public class LoginService {
         PreiseingabeUnternehmenEntity preiseingabeUnternehmenEntity = new PreiseingabeUnternehmenEntity();
         String returnStatement = "fehlgeschlagen";
 
-        // Dateneingabe gehört zu welchem Unternehmen? Nach UN_Id suchen und festlegen anhand des Passwortes
-/*        String f = preiseingabeUnternehmen.getKennwort();
-        int m = f.hashCode();*/
+        if( preiseingabeUnternehmen.getPostleitzahl().equals("") ||
+                preiseingabeUnternehmen.getPreis2700Liter().equals("") ||
+                preiseingabeUnternehmen.getPreis4850Liter().equals("") ||
+                preiseingabeUnternehmen.getPreis6400Liter().equals("")
+        ){
+            returnStatement = "leer";
+        } else {
+            for(UnternehmenEntity k : unternehemensRepository.findAll()){
+                if( k.getPasswort().equals(aktuellerNutzer)){
+                    preiseingabeUnternehmenEntity.setUnternehmenId(k.getId());
 
-        for(UnternehmenEntity k : unternehemensRepository.findAll()){
-            if( k.getPasswort().equals(aktuellerNutzer)){
-                preiseingabeUnternehmenEntity.setUnternehmenId(k.getId());
+                    // Danach Json Daten vom Frontend in PreisEingabeUnternehmenEntity(Datenbank) speichern
+                    preiseingabeUnternehmenEntity.setDatum(new Date(new java.util.Date().getTime()));
+                    preiseingabeUnternehmenEntity.setPreis2700Liter(preiseingabeUnternehmen.getPreis2700Liter());
+                    preiseingabeUnternehmenEntity.setPreis4850Liter(preiseingabeUnternehmen.getPreis4850Liter());
+                    preiseingabeUnternehmenEntity.setPreis6400Liter(preiseingabeUnternehmen.getPreis6400Liter());
 
-                // Danach Json Daten vom Frontend in PreisEingabeUnternehmenEntity(Datenbank) speichern
-                preiseingabeUnternehmenEntity.setDatum(new Date(new java.util.Date().getTime()));
-                preiseingabeUnternehmenEntity.setPreis2700Liter(preiseingabeUnternehmen.getPreis2700Liter());
-                preiseingabeUnternehmenEntity.setPreis4850Liter(preiseingabeUnternehmen.getPreis4850Liter());
-                preiseingabeUnternehmenEntity.setPreis6400Liter(preiseingabeUnternehmen.getPreis6400Liter());
-
-                // zusätzlich noch die restlichen fehlenden Attribute für PreisEingabeUnternehmentEntity festlegen wie PlzId
-                boolean plzEnthalten = false;
-                int plz = 0;
-                for(PostleitzahlenEntity i: plzRepository.findAll()){
-                    if(preiseingabeUnternehmen.getPostleitzahl().equals(i.getPlz())){
-                        plzEnthalten = true;
-                        plz = i.getId();
+                    // zusätzlich noch die restlichen fehlenden Attribute für PreisEingabeUnternehmentEntity festlegen wie PlzId
+                    boolean plzEnthalten = false;
+                    int plz = 0;
+                    for(PostleitzahlenEntity i: plzRepository.findAll()){
+                        if(preiseingabeUnternehmen.getPostleitzahl().equals(i.getPlz())){
+                            plzEnthalten = true;
+                            plz = i.getId();
+                        }
                     }
+
+                    if(plzEnthalten == true){
+                        preiseingabeUnternehmenEntity.setPostleitzahlenId(plz);
+                    } else {
+                        PostleitzahlenEntity postleitzahlenEntity = new PostleitzahlenEntity();
+                        postleitzahlenEntity.setPlz(preiseingabeUnternehmen.getPostleitzahl());
+                        plzRepository.save(postleitzahlenEntity);
+                        preiseingabeUnternehmenEntity.setPostleitzahlenId(postleitzahlenEntity.getId());
+                    }
+
+                    // speichern in Datenbank PreisEingabeUnternehmenEntity!
+                    preiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
+
+                    // return Statement erfolgreich setzen.
+                    returnStatement = "erfolgreich";
                 }
-
-                if(plzEnthalten == true){
-                    preiseingabeUnternehmenEntity.setPostleitzahlenId(plz);
-                } else {
-                    PostleitzahlenEntity postleitzahlenEntity = new PostleitzahlenEntity();
-                    postleitzahlenEntity.setPlz(preiseingabeUnternehmen.getPostleitzahl());
-                    plzRepository.save(postleitzahlenEntity);
-                    preiseingabeUnternehmenEntity.setPostleitzahlenId(postleitzahlenEntity.getId());
-                }
-
-                // speichern in Datenbank PreisEingabeUnternehmenEntity!
-                preiseingabeUnternehmenRepository.save(preiseingabeUnternehmenEntity);
-
-                // return Statement erfolgreich setzen.
-                returnStatement = "erfolgreich";
             }
+
         }
+
 
         return returnStatement;
     }
