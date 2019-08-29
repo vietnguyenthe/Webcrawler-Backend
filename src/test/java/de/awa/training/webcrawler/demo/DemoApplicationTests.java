@@ -1,4 +1,4 @@
-package de.awa.training.webcrawler.webcrawlerbackend.demo;
+package de.awa.training.webcrawler.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

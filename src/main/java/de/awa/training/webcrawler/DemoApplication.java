@@ -62,18 +62,18 @@ public class DemoApplication {
         if(unternehemensRepository.findAll().isEmpty()){
             Integer i = Integer.valueOf(1);
             for (String[]einezelnesUnternehmen:unternehmen) {
-                    UnternehmenEntity entity = new UnternehmenEntity();
-                    entity.setId(i);
-                    entity.setName(einezelnesUnternehmen[0]);
-                    entity.setAdresse(einezelnesUnternehmen[1]);
-                    entity.setPlz(einezelnesUnternehmen[2]);
-                    entity.setOrt(einezelnesUnternehmen[3]);
-                    entity.setBenutzername(einezelnesUnternehmen[4]);
-                    entity.setPasswort(einezelnesUnternehmen[5].hashCode());
-                    unternehemensRepository.save(entity);
-                    i++;
-                }
+                UnternehmenEntity entity = new UnternehmenEntity();
+                entity.setId(i);
+                entity.setName(einezelnesUnternehmen[0]);
+                entity.setAdresse(einezelnesUnternehmen[1]);
+                entity.setPlz(einezelnesUnternehmen[2]);
+                entity.setOrt(einezelnesUnternehmen[3]);
+                entity.setBenutzername(einezelnesUnternehmen[4]);
+                entity.setPasswort(einezelnesUnternehmen[5].hashCode());
+                unternehemensRepository.save(entity);
+                i++;
             }
+        }
         try {
             pfiffiggasWebcrawler.allePLZCrawlen();
             meinFluessiggasWebcrawler.allePLZCrawlen();
